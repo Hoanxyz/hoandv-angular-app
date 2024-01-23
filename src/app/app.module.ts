@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NewYearModule} from "./modules/new-year/new-year.module";
 import {NewYearRoutingModule} from "./modules/new-year/new-year-routing.module";
 import {MatDialogModule} from "@angular/material/dialog";
+import {ApiService} from "./shared/services/services.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     NewYearRoutingModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

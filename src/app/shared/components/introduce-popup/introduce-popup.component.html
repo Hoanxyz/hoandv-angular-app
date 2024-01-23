@@ -10,7 +10,14 @@
             <a href="#" class="av bg-no-repeat bg-contain">
             </a>
           </div>
-          <button class="font-medium mt-2" (click)="letGo()">Get Go</button>
+          <form action="" [formGroup]="formLogin">
+            <mat-form-field class="w-full">
+              <mat-label>User</mat-label>
+              <input matInput formControlName="user">
+              <mat-error *ngIf="formLogin.get('user')?.errors?.['required']">This is a required field.</mat-error>
+            </mat-form-field>
+            <button class="font-medium mt-2" (click)="letGo()">Get Go</button>
+          </form>
         </div>
       </div>
       <div class="overlay-container overflow-hidden">

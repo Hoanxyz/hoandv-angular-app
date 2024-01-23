@@ -3,6 +3,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {Router} from "@angular/router";
+import {FormBuilder, Validators} from "@angular/forms";
+import {ApiService} from "../../services/services.service";
 
 @Component({
   selector: 'app-introduce-popup',
@@ -40,10 +42,17 @@ export class IntroducePopupComponent {
   isChangePos = false;
   changeImages = true;
   hiddenPopup = false;
+  formLogin = this.fb.group({
+    user: [
+      '', [Validators.required]
+    ]
+  })
 
   constructor(
     public dialog: MatDialog,
-    public router: Router
+    public router: Router,
+    private fb: FormBuilder,
+    private apiService: ApiService
   ) {
   }
 
@@ -60,9 +69,22 @@ export class IntroducePopupComponent {
         }
       })
     } else {
-      console.log('is change');
-      this.hiddenPopup = true;
-      this.router.navigate([this.url]);
+      if (!this.formLogin.valid) {
+        this.formLogin.markAllAsTouched();
+        return;
+      }
+
+      const user = this.formLogin.get('user')?.value;
+      if (this.apiService.validateUsername(typeof user === "string" ? user : 'unkown')) {
+        this.hiddenPopup = true;
+        this.router.navigate([this.url]);
+      } else {
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            content: 'Chú heo con điền sai thông tin rồi'
+          }
+        })
+      }
     }
   }
 }

@@ -9,6 +9,8 @@ import { TimelineComponent } from './timeline/timeline.component';
 import { EventComponent } from './timeline/event/event.component';
 import {LightgalleryModule} from "lightgallery/angular";
 import {NewYearComponent} from "./new-year/new-year.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -21,12 +23,14 @@ import {NewYearComponent} from "./new-year/new-year.component";
     TimelineComponent,
     EventComponent
   ],
-    imports: [
-      CommonModule,
-      NewYearRoutingModule,
-      NgOptimizedImage,
-      LightgalleryModule
-    ],
+  imports: [
+    CommonModule,
+    NewYearRoutingModule,
+    NgOptimizedImage,
+    LightgalleryModule,
+    ReactiveFormsModule,
+    MatInputModule
+  ],
   exports: [
   ]
 })
