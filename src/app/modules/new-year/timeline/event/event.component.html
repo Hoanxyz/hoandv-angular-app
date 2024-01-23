@@ -1,0 +1,34 @@
+<svg class="hidden">
+  <symbol id="arrow">
+    <polyline points="7 10,12 15,17 10" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+  </symbol>
+</svg>
+
+<div class="timeline__item font-mali" [ngClass]="noLine ? 'no-line' : ''">
+  <div class="timeline__item-header">
+    <button #button (click)="toggle()" class="timeline__arrow" type="button" id="item1"
+            aria-labelledby="item1-name" aria-expanded="false" aria-controls="item1-ctrld"
+            aria-haspopup="true" data-item="1">
+      <svg class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+        <use href="#arrow" />
+      </svg>
+    </button>
+    <span class="timeline__dot"></span>
+    <span id="item1-name" class="timeline__meta">
+				<time class="timeline__date font-semibold text-gray-800">{{ event?.time }}</time><br>
+				<strong class="timeline__title block mb-2">{{ event?.title }}</strong>
+        <img class="rounded" src="{{ event?.thumbnail }}" alt="thumbnail">
+			</span>
+  </div>
+  <div #content class="timeline__item-body"
+       id="item1-ctrld" role="region" aria-labelledby="item1" aria-hidden="true">
+    <div class="timeline__item-body-content p-3 mt-6 rounded overflow-hidden">
+      <p class="timeline__item-p pb-6" [innerHTML]="event?.content"></p>
+      <lightgallery [settings]="settings" [onBeforeSlide]="onBeforeSlide">
+        <ng-container *ngFor="let image of event?.images">
+          <img class="mb-3 last:mb-0 rounded" src="{{ image }}" alt="picnic">
+        </ng-container>
+      </lightgallery>
+    </div>
+  </div>
+</div>
