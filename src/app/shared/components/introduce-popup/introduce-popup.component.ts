@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
-import {Router} from "@angular/router";
+import {NavigationExtras, Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ApiService} from "../../services/services.service";
 
@@ -39,6 +39,8 @@ import {ApiService} from "../../services/services.service";
 export class IntroducePopupComponent {
 
   @Input() url: string | undefined;
+  @Input() users: any;
+  @Input() avatars: any;
   isChangePos = false;
   changeImages = true;
   hiddenPopup = false;
@@ -73,18 +75,22 @@ export class IntroducePopupComponent {
         this.formLogin.markAllAsTouched();
         return;
       }
-
-      const user = this.formLogin.get('user')?.value;
-      if (this.apiService.validateUsername(typeof user === "string" ? user : 'unkown')) {
-        this.hiddenPopup = true;
-        this.router.navigate([this.url]);
-      } else {
-        this.dialog.open(AlertDialogComponent, {
-          data: {
-            content: 'Chú heo con điền sai thông tin rồi'
-          }
-        })
+      this.hiddenPopup = true;
+      const navigationExtra: NavigationExtras = {
+        queryParams: {
+          user: this.formLogin.get('user')?.value
+        }
       }
+      this.router.navigate([this.url], navigationExtra);
+      // const user = this.formLogin.get('user')?.value;
+      // if (this.apiService.validateUsername(typeof user === "string" ? user : 'unkown')) {
+      // } else {
+      //   this.dialog.open(AlertDialogComponent, {
+      //     data: {
+      //       content: 'Chú heo con điền sai thông tin rồi'
+      //     }
+      //   })
+      // }
     }
   }
 }

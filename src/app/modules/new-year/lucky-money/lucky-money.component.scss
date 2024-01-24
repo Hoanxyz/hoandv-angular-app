@@ -1,0 +1,114 @@
+.lucky-money-wrapper {
+  background: url('/assets/images/bg-new-year-2.png') repeat-x bottom;
+}
+
+.envelope {
+  width: 250px;
+  height: 450px;
+  position: relative;
+  background: #ad6605;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -3px #989898;
+}
+
+.top,
+.bottom {
+  border-left: 125px solid transparent;
+  border-right: 125px solid transparent;
+  width: 0;
+  height: 0;
+  position: relative;
+}
+
+.top {
+  border-bottom: 80px solid #fcd34d;
+  top: -80px;
+  transform-origin: bottom;
+  z-index: 3;
+  transition: all .8s ease;
+  transform: rotateX(0deg);
+}
+
+.bottom {
+  top: -60px;
+  z-index: 4;
+  height: 430px;
+  border: none;
+  width: 250px;
+}
+
+.left,
+.right {
+  width: 0;
+  height: 0;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  top: 0;
+  z-index: 4;
+}
+
+.left {
+  border-left: 125px solid #b91c1c;
+  position: absolute;
+  left: 0;
+}
+
+.right {
+  border-right: 125px solid #b91c1c;
+  position: absolute;
+  right: 0;
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 1s ease;
+  z-index: 3;
+  transition-delay: 0.4s;
+  top: -27%;
+}
+
+.paper {
+  width: 90%;
+  height: 90%;
+  background: #f6f8e7;
+  margin: 6px auto 0;
+  box-shadow: 0 0 2px 0 #909090;
+  transition: all 0.5s ease-out;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.envelope.fold .back {
+  z-index: 3;
+  transition-delay: 0.3s;
+  top: 0;
+}
+
+.envelope.fold .top {
+  transition-delay: .8s;
+  transform: rotateX(180deg);
+  z-index: 6;
+}
+
+.paper .line {
+  margin: 4px 0;
+}
+
+.paper .line.one {
+  width: 50%;
+}
+
+.paper .line.two {
+  width: 30%;
+}
+
+.paper .line.three {
+  width: 80%;
+}

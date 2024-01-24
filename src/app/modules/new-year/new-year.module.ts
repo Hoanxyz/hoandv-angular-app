@@ -11,6 +11,8 @@ import {LightgalleryModule} from "lightgallery/angular";
 import {NewYearComponent} from "./new-year/new-year.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import { LuckyMoneyComponent } from './lucky-money/lucky-money.component';
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import {MatInputModule} from "@angular/material/input";
     IntroducePageComponent,
     FireWorksComponent,
     TimelineComponent,
-    EventComponent
+    EventComponent,
+    LuckyMoneyComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import {MatInputModule} from "@angular/material/input";
     NgOptimizedImage,
     LightgalleryModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
   ]

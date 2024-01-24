@@ -1,0 +1,23 @@
+<div class="bg-rose-50">
+  <div class="lucky-money-wrapper px-3 pb-16 pt-20 relative">
+    <img class="absolute top-1 right-0 h-auto w-40 lg:w-60" src="assets/images/bg-new-year-4.png" alt="apricot">
+    <img class="absolute top-1 left-0 h-auto w-32 lg:w-52" src="assets/images/bg-new-year-3.png" alt="apricot">
+    <h2 class="text-center text-3xl font-sansita font-medium">Mở lì xì nào</h2>
+    <div class="envelope mx-auto my-10" [ngClass]="open ? '' : 'fold'" (click)="toggle()">
+      <div class="top"></div>
+      <div class="left"></div>
+      <div class="back">
+        <div class="paper p-3">
+          <span class="line font-mali">{{ content }}</span>
+        </div>
+      </div>
+      <div class="right"></div>
+      <div class="bottom bg-red-700 relative">
+        <div class="custom-item-center w-full pt-4">
+          <img class="w-full" src="assets/images/dragon-1.png" alt="dragon">
+          <p class="pt-6 text-3xl font-medium text-center font-dancing text-amber-300">Happy New Year</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

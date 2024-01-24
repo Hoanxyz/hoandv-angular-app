@@ -11,6 +11,8 @@ module.exports = {
         lobster: ['"Lobster", sans-serif'],
         calistoga: ['"Calistoga", serif'],
         mali: ['"Mali", cursive'],
+        dancing: ['"Dancing Script", cursive'],
+        sansita: ['"Sansita Swashed", system-ui']
       }
     },
   },

@@ -48,3 +48,36 @@ export const EVENTS = [
     thumbnail: 'assets/images/cuoi-lta-2.jpg'
   }
 ]
+
+export const users = [
+  {value: 'LE_ANH', viewValue: 'Lê Tuấn Anh'},
+  {value: 'NGUYEN_ANH', viewValue: 'Nguyễn Tuấn Anh'},
+  {value: 'HA', viewValue: 'Bùi Hà'},
+  {value: 'HIEP', viewValue: 'Vũ Hiệp'},
+  {value: 'TRAN_NAM', viewValue: 'Trần Nam'},
+  {value: 'NGUYEN_NAM', viewValue: 'Nguyễn Nam'},
+  {value: 'NGA', viewValue: 'Vũ Nga'},
+  {value: 'LE_NGOC', viewValue: 'Lê Ngọc'},
+  {value: 'NGUYEN_NGOC', viewValue: 'Nguyễn Ngọc'},
+  {value: 'NHUNG', viewValue: 'Nguyễn Nhung'},
+  {value: 'YEN', viewValue: 'Bùi Yến'},
+];
+
+export enum LuckyMoney {
+  LE_ANH = 'Chúc cậu Lê Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế',
+  NGUYEN_ANH = 'Chúc cậu Nguyễn Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế',
+  HA = 'Chúc Hà sớm tìm được người thương',
+  HIEP = 'Chúc cậu Hiệp và công ty ngày càng phát triển',
+  TRAN_NAM = 'Chúc cậu Nam Đa sớm tìm được người thương đi Mẹc',
+  NGUYEN_NAM = 'Chúc cậu Nguyễn Nam sớm tìm được người thương',
+  NGA = 'Chúc Nga sớm tìm anh chủ tịch của mình',
+  LE_NGOC = 'Chúc Ngọc và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế',
+  NGUYEN_NGOC = 'Chúc cậu Phú Ngọc sớm tìm được người thương',
+  NHUNG = 'Chúc Nhung sớm tìm được người thương',
+  YEN = 'Chúc Yến và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế'
+}
+
+export const avatars = [
+  {normal: 'assets/images/green.png', special: 'assets/images/orange.png'},
+  {normal: 'assets/images/green.png', special: 'assets/images/orange.png'}
+]

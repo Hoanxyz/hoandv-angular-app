@@ -1,20 +1,24 @@
 <div [hidden]="hiddenPopup">
   <div class="flex justify-center custom-item-center w-full md:w-max">
-    <div class="container overflow-hidden mx-4 md:flex flex-wrap" [ngClass]="changeImages ? 'left-panel-active' : 'right-panel-active'">
+    <div class="container overflow-hidden mx-5 md:flex flex-wrap" [ngClass]="changeImages ? 'left-panel-active' : 'right-panel-active'">
       <div class="form-container px-3 pt-3">
         <div class="pb-4 md:px-12 bg-white flex items-center justify-center flex-col h-full text-center">
           <h2 class="font-medium" [@textChange]="changeImages ? 'start' : 'end'">{{ changeImages ? 'Xàmers' : 'Vẫn là Xàmers'}}</h2>
           <div class="av-container overflow-hidden">
-            <a href="#" class="av bg-no-repeat bg-contain">
-            </a>
-            <a href="#" class="av bg-no-repeat bg-contain">
-            </a>
+            <ng-container *ngFor="let avatar of avatars">
+              <span class="av bg-no-repeat bg-contain" [ngStyle]="{ backgroundImage: changeImages ? avatar.normal : avatar.special}">
+              </span>
+            </ng-container>
           </div>
           <form action="" [formGroup]="formLogin">
-            <mat-form-field class="w-full">
-              <mat-label>User</mat-label>
-              <input matInput formControlName="user">
-              <mat-error *ngIf="formLogin.get('user')?.errors?.['required']">This is a required field.</mat-error>
+            <mat-form-field class="w-full my-2">
+              <mat-label>Bạn là khứa nào nhỉ ?</mat-label>
+              <mat-select formControlName="user">
+                <mat-option *ngFor="let user of users" [value]="user.value">
+                  {{user.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formLogin.get('user')?.errors?.['required']">Chú heo con chưa chọn thông tin rồi</mat-error>
             </mat-form-field>
             <button class="font-medium mt-2" (click)="letGo()">Get Go</button>
           </form>
