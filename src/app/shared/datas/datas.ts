@@ -78,6 +78,15 @@ export enum LuckyMoney {
 }
 
 export const avatars = [
-  {normal: 'assets/images/green.png', special: 'assets/images/orange.png'},
-  {normal: 'assets/images/green.png', special: 'assets/images/orange.png'}
+  {normal: '/assets/images/le-anh-normal.jpg', special: '/assets/images/le-anh-special.jpg'},
+  {normal: '/assets/images/nguyen-anh-normal.jpg', special: '/assets/images/nguyen-anh-special.jpg'},
+  {normal: '/assets/images/ha-normal.jpg', special: '/assets/images/ha-special.jpg'},
+  {normal: '/assets/images/hiep-normal.jpg', special: '/assets/images/hiep-special.jpg'},
+  {normal: '/assets/images/tran-nam-normal.jpg', special: '/assets/images/tran-nam-special.jpg'},
+  {normal: '/assets/images/nguyen-nam-normal.jpg', special: '/assets/images/nguyen-nam-special.jpg'},
+  {normal: '/assets/images/nga-normal.jpg', special: '/assets/images/nga-special.jpg'},
+  {normal: '/assets/images/le-ngoc-normal.jpg', special: '/assets/images/le-ngoc-special.jpg'},
+  {normal: '/assets/images/phu-ngoc-normal.jpg', special: '/assets/images/phu-ngoc-special.jpg'},
+  {normal: '/assets/images/nhung-normal.jpg', special: '/assets/images/nhung-special.jpg'},
+  {normal: '/assets/images/yen-normal.jpg', special: '/assets/images/yen-special.jpg'},
 ]

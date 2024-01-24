@@ -42,7 +42,7 @@ export class IntroducePopupComponent {
   @Input() users: any;
   @Input() avatars: any;
   isChangePos = false;
-  changeImages = true;
+  changeImages = false;
   hiddenPopup = false;
   formLogin = this.fb.group({
     user: [
