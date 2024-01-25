@@ -13,15 +13,14 @@
 
 .top,
 .bottom {
-  border-left: 125px solid transparent;
-  border-right: 125px solid transparent;
-  width: 0;
-  height: 0;
   position: relative;
 }
 
 .top {
-  border-bottom: 80px solid #fcd34d;
+  width: 250px;
+  height: 80px;
+  background-color: #eabd41;
+  border-radius: 10rem 10rem 0 0;
   top: -80px;
   transform-origin: bottom;
   z-index: 3;

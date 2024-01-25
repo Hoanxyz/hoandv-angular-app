@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import {User} from "../models/models";
+import {users} from '../datas/datas'
 
 @Injectable()
 export class ApiService {
   constructor() {}
 
-  validateUsername(username: string): boolean {
-    let existedUsers = ['dvhoan', 'tdnam', 'ltanh', 'ntanh', 'npngoc', 'vhhiep', 'ndnam', 'btha', 'bhyen',
-      'nttnhung', 'vthnga', 'lhngoc'];
-    return existedUsers.includes(username);
+  getUser(userCode: string): Observable<User | undefined> {
+    const user = users.find(item => item.code === userCode);
+    return of(user);
   }
 }

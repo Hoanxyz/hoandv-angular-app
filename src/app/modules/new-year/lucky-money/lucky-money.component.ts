@@ -7,17 +7,15 @@ import {LuckyMoney} from "../../../shared/datas/datas";
   styleUrls: ['./lucky-money.component.scss']
 })
 export class LuckyMoneyComponent implements OnInit {
-  @Input() user: string | undefined;
+  @Input() userCode!: string;
   open = false;
-  content: string | undefined;
+  content!: string;
 
   toggle() {
     this.open = !this.open;
   }
 
   ngOnInit(): void {
-    // @ts-ignore
-    this.content = LuckyMoney[this.user];
-    console.log(this.content);
+    this.content = LuckyMoney[this.userCode as keyof typeof LuckyMoney];
   }
 }

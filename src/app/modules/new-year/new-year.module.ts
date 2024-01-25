@@ -14,7 +14,6 @@ import {MatInputModule} from "@angular/material/input";
 import { LuckyMoneyComponent } from './lucky-money/lucky-money.component';
 import {MatSelectModule} from "@angular/material/select";
 
-
 @NgModule({
   declarations: [
     NewYearComponent,

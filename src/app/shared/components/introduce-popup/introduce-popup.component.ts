@@ -4,7 +4,7 @@ import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {NavigationExtras, Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
-import {ApiService} from "../../services/services.service";
+import {Avatar, User} from "../../models/models";
 
 @Component({
   selector: 'app-introduce-popup',
@@ -38,14 +38,14 @@ import {ApiService} from "../../services/services.service";
 
 export class IntroducePopupComponent {
 
-  @Input() url: string | undefined;
-  @Input() users: any;
-  @Input() avatars: any;
+  @Input() url!: string;
+  @Input() users!: Array<User>;
+  @Input() avatars!: Array<Avatar>;
   isChangePos = false;
   changeImages = false;
   hiddenPopup = false;
   formLogin = this.fb.group({
-    user: [
+    userCode: [
       '', [Validators.required]
     ]
   })
@@ -53,8 +53,7 @@ export class IntroducePopupComponent {
   constructor(
     public dialog: MatDialog,
     public router: Router,
-    private fb: FormBuilder,
-    private apiService: ApiService
+    private fb: FormBuilder
   ) {
   }
 
@@ -78,19 +77,10 @@ export class IntroducePopupComponent {
       this.hiddenPopup = true;
       const navigationExtra: NavigationExtras = {
         queryParams: {
-          user: this.formLogin.get('user')?.value
+          userCode: this.formLogin.get('userCode')?.value
         }
       }
       this.router.navigate([this.url], navigationExtra);
-      // const user = this.formLogin.get('user')?.value;
-      // if (this.apiService.validateUsername(typeof user === "string" ? user : 'unkown')) {
-      // } else {
-      //   this.dialog.open(AlertDialogComponent, {
-      //     data: {
-      //       content: 'Chú heo con điền sai thông tin rồi'
-      //     }
-      //   })
-      // }
     }
   }
 }

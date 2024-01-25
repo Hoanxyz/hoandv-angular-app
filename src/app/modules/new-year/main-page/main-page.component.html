@@ -1,18 +1,20 @@
-<app-fire-works></app-fire-works>
-<div class="wish-words text-red-900 px-3 pt-24 pb-8 lg:py-20 font-mali relative lg:p-8 font-semibold overflow-hidden">
-  <img class="absolute top-1 right-0 h-auto w-44 lg:w-60 2xl:w-80" src="assets/images/dao-tet.png" alt="apricot">
-  <img class="absolute top-20 right-0 h-auto w-48 lg:w-60" src="/assets/images/sakura-leaves.gif" alt="sakura-fall" />
-  <img class="absolute top-3 -left-1 h-auto w-44 lg:w-60 2xl:w-80" src="assets/images/hoa-dao-left.png" alt="apricot">
-  <h2 class="text-3xl lg:text-center mt-8 mb-4 text-center">Năm mới chúc các bợn</h2>
-  <ul class="relative text-center text-xl">
-    <li class="mb-2">Đang ế thì nhanh có người eo.</li>
-    <li class="mb-2">Có ny thì nhanh lập gia đình.</li>
-    <li>Có gia đình sẽ con đàn cháu đống.</li>
-  </ul>
-</div>
-<div class="font-mali p-3 pt-8 bg-sky-50">
-  <h2 class="text-3xl font-sansita font-semibold mb-6 text-center">Chuỗi sự kện bùng nổ 2023</h2>
-  <app-timeline></app-timeline>
-</div>
+<div class="relative">
+  <app-fire-works></app-fire-works>
+  <div class="wish-words text-red-900 px-3 pt-24 pb-8 lg:py-20 font-mali relative lg:p-8 font-semibold overflow-hidden">
+    <img class="absolute top-1 right-0 h-auto w-44 lg:w-60 2xl:w-80" src="assets/images/dao-tet.png" alt="apricot">
+    <img class="absolute top-20 right-0 h-auto w-48 lg:w-60" src="/assets/images/sakura-leaves.gif" alt="sakura-fall" />
+    <img class="absolute top-3 -left-1 h-auto w-44 lg:w-60 2xl:w-80" src="assets/images/hoa-dao-left.png" alt="apricot">
+    <h2 class="text-3xl lg:text-center mt-8 mb-4 text-center">Năm mới chúc các bợn</h2>
+    <ul class="relative text-center text-xl">
+      <li class="mb-2">Đang ế thì nhanh có người eo.</li>
+      <li class="mb-2">Có ny thì nhanh lập gia đình.</li>
+      <li>Có gia đình sẽ con đàn cháu đống.</li>
+    </ul>
+  </div>
+  <div class="font-mali p-3 pt-8 pr-5 bg-sky-50">
+    <h2 class="text-3xl font-sansita font-semibold mb-6 text-center">Chuỗi sự kện bùng nổ 2023</h2>
+    <app-timeline></app-timeline>
+  </div>
 
-<app-lucky-money [user]="user"></app-lucky-money>
+  <app-lucky-money [userCode]="userCode"></app-lucky-money>
+</div>

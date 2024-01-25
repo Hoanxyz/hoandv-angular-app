@@ -50,43 +50,73 @@ export const EVENTS = [
 ]
 
 export const users = [
-  {value: 'LE_ANH', viewValue: 'Lê Tuấn Anh'},
-  {value: 'NGUYEN_ANH', viewValue: 'Nguyễn Tuấn Anh'},
-  {value: 'HA', viewValue: 'Bùi Hà'},
-  {value: 'HIEP', viewValue: 'Vũ Hiệp'},
-  {value: 'TRAN_NAM', viewValue: 'Trần Nam'},
-  {value: 'NGUYEN_NAM', viewValue: 'Nguyễn Nam'},
-  {value: 'NGA', viewValue: 'Vũ Nga'},
-  {value: 'LE_NGOC', viewValue: 'Lê Ngọc'},
-  {value: 'NGUYEN_NGOC', viewValue: 'Nguyễn Ngọc'},
-  {value: 'NHUNG', viewValue: 'Nguyễn Nhung'},
-  {value: 'YEN', viewValue: 'Bùi Yến'},
+  {
+    code: 'LE_ANH',
+    fullName: 'Lê Tuấn Anh',
+    avatar: {normal: '/assets/images/le-anh-normal.jpg', special: '/assets/images/le-anh-special.jpg'}
+  },
+  {
+    code: 'NGUYEN_ANH',
+    fullName: 'Nguyễn Tuấn Anh',
+    avatar: {normal: '/assets/images/nguyen-anh-normal.jpg', special: '/assets/images/nguyen-anh-special.jpg'}
+  },
+  {
+    code: 'HA',
+    fullName: 'Bùi Hà',
+    avatar: {normal: '/assets/images/ha-normal.jpg', special: '/assets/images/ha-special.jpg'}
+  },
+  {
+    code: 'HIEP',
+    fullName: 'Vũ Hiệp',
+    avatar: {normal: '/assets/images/hiep-normal.jpg', special: '/assets/images/hiep-special.jpg'}
+  },
+  {
+    code: 'TRAN_NAM',
+    fullName: 'Trần Nam',
+    avatar: {normal: '/assets/images/tran-nam-normal.jpg', special: '/assets/images/tran-nam-special.jpg'}
+  },
+  {
+    code: 'NGUYEN_NAM',
+    fullName: 'Nguyễn Nam',
+    avatar: {normal: '/assets/images/nguyen-nam-normal.jpg', special: '/assets/images/nguyen-nam-special.jpg'}
+  },
+  {
+    code: 'NGA',
+    fullName: 'Vũ Nga',
+    avatar: {normal: '/assets/images/nga-normal.jpg', special: '/assets/images/nga-special.jpg'}
+  },
+  {
+    code: 'LE_NGOC',
+    fullName: 'Lê Ngọc',
+    avatar: {normal: '/assets/images/le-ngoc-normal.jpg', special: '/assets/images/le-ngoc-special.jpg'}
+  },
+  {
+    code: 'NGUYEN_NGOC',
+    fullName: 'Nguyễn Ngọc',
+    avatar: {normal: '/assets/images/phu-ngoc-normal.jpg', special: '/assets/images/phu-ngoc-special.jpg'}
+  },
+  {
+    code: 'NHUNG',
+    fullName: 'Nguyễn Nhung',
+    avatar: {normal: '/assets/images/nhung-normal.jpg', special: '/assets/images/nhung-special.jpg'}
+  },
+  {
+    code: 'YEN',
+    fullName: 'Bùi Yến',
+    avatar: {normal: '/assets/images/yen-normal.jpg', special: '/assets/images/yen-special.jpg'}
+  },
 ];
 
 export enum LuckyMoney {
-  LE_ANH = 'Chúc cậu Lê Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế',
-  NGUYEN_ANH = 'Chúc cậu Nguyễn Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế',
-  HA = 'Chúc Hà sớm tìm được người thương',
-  HIEP = 'Chúc cậu Hiệp và công ty ngày càng phát triển',
-  TRAN_NAM = 'Chúc cậu Nam Đa sớm tìm được người thương đi Mẹc',
-  NGUYEN_NAM = 'Chúc cậu Nguyễn Nam sớm tìm được người thương',
-  NGA = 'Chúc Nga sớm tìm anh chủ tịch của mình',
-  LE_NGOC = 'Chúc Ngọc và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế',
-  NGUYEN_NGOC = 'Chúc cậu Phú Ngọc sớm tìm được người thương',
-  NHUNG = 'Chúc Nhung sớm tìm được người thương',
-  YEN = 'Chúc Yến và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế'
+  LE_ANH = 'Chúc cậu Lê Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.',
+  NGUYEN_ANH = 'Chúc cậu Nguyễn Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.',
+  HA = 'Chúc Hà luôn xinh đẹp và sớm tìm được người thương để cho các bạn trố mắt.',
+  HIEP = 'Chúc cậu Hiệp và công ty ngày càng phát triển, làm ăn phát đạt.',
+  TRAN_NAM = 'Chúc cậu Nam Đa sớm tìm được người thương đi Mẹc, có lâu đài.',
+  NGUYEN_NAM = 'Chúc cậu Nguyễn Nam sớm tìm được người thương, năm nay lên vài bậc và hàm.',
+  NGA = 'Chúc Nga luôn xinh đẹp và sớm tìm anh tổng tài của mình.',
+  LE_NGOC = 'Chúc Ngọc và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.',
+  NGUYEN_NGOC = 'Chúc cậu Phú Ngọc sớm tìm được người thương, lái xe an toàn.',
+  NHUNG = 'Chúc Nhung luôn xinh đẹp và sớm tìm được người thương để cho các bạn được ăn cỗ.',
+  YEN = 'Chúc Yến và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.'
 }
-
-export const avatars = [
-  {normal: '/assets/images/le-anh-normal.jpg', special: '/assets/images/le-anh-special.jpg'},
-  {normal: '/assets/images/nguyen-anh-normal.jpg', special: '/assets/images/nguyen-anh-special.jpg'},
-  {normal: '/assets/images/ha-normal.jpg', special: '/assets/images/ha-special.jpg'},
-  {normal: '/assets/images/hiep-normal.jpg', special: '/assets/images/hiep-special.jpg'},
-  {normal: '/assets/images/tran-nam-normal.jpg', special: '/assets/images/tran-nam-special.jpg'},
-  {normal: '/assets/images/nguyen-nam-normal.jpg', special: '/assets/images/nguyen-nam-special.jpg'},
-  {normal: '/assets/images/nga-normal.jpg', special: '/assets/images/nga-special.jpg'},
-  {normal: '/assets/images/le-ngoc-normal.jpg', special: '/assets/images/le-ngoc-special.jpg'},
-  {normal: '/assets/images/phu-ngoc-normal.jpg', special: '/assets/images/phu-ngoc-special.jpg'},
-  {normal: '/assets/images/nhung-normal.jpg', special: '/assets/images/nhung-special.jpg'},
-  {normal: '/assets/images/yen-normal.jpg', special: '/assets/images/yen-special.jpg'},
-]
