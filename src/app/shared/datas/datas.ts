@@ -116,7 +116,7 @@ export enum LuckyMoney {
   NGUYEN_NAM = 'Chúc cậu Nguyễn Nam sớm tìm được người thương, năm nay lên vài bậc và hàm.',
   NGA = 'Chúc Nga luôn xinh đẹp và sớm tìm anh tổng tài của mình.',
   LE_NGOC = 'Chúc Ngọc và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.',
-  NGUYEN_NGOC = 'Chúc cậu Phú Ngọc sớm tìm được người thương, lái xe an toàn.',
+  NGUYEN_NGOC = 'Chúc cậu Phú Ngọc sớm tìm được người thương, lái xe luôn an toàn.',
   NHUNG = 'Chúc Nhung luôn xinh đẹp và sớm tìm được người thương để cho các bạn được ăn cỗ.',
   YEN = 'Chúc Yến và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.'
 }

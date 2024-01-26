@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LuckyMoney} from "../../../shared/datas/datas";
+import {User} from "../../../shared/models/models";
 
 @Component({
   selector: 'app-lucky-money',
@@ -7,7 +8,7 @@ import {LuckyMoney} from "../../../shared/datas/datas";
   styleUrls: ['./lucky-money.component.scss']
 })
 export class LuckyMoneyComponent implements OnInit {
-  @Input() userCode!: string;
+  @Input() user!: User;
   open = false;
   content!: string;
 
@@ -16,6 +17,6 @@ export class LuckyMoneyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.content = LuckyMoney[this.userCode as keyof typeof LuckyMoney];
+    this.content = LuckyMoney[this.user.code as keyof typeof LuckyMoney];
   }
 }

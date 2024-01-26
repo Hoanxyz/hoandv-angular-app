@@ -18,10 +18,10 @@
 
 .top {
   width: 250px;
-  height: 80px;
+  height: 60px;
   background-color: #eabd41;
   border-radius: 10rem 10rem 0 0;
-  top: -80px;
+  top: -60px;
   transform-origin: bottom;
   z-index: 3;
   transition: all .8s ease;
@@ -31,7 +31,7 @@
 .bottom {
   top: -60px;
   z-index: 4;
-  height: 430px;
+  height: 450px;
   border: none;
   width: 250px;
 }

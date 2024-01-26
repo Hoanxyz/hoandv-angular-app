@@ -10,7 +10,7 @@ import {User} from "../../../shared/models/models";
 })
 export class MainPageComponent implements OnInit {
   userCode!: string;
-  user: User | undefined;
+  user!: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +25,9 @@ export class MainPageComponent implements OnInit {
         this.userCode = params['userCode'];
         this.apiService.getUser(this.userCode).subscribe(
           (data) => {
-            this.user = data;
+            if (data) {
+              this.user = data;
+            }
             console.log(this.user);
           }
         )
