@@ -11,6 +11,7 @@ import {User} from "../../../shared/models/models";
 export class MainPageComponent implements OnInit {
   userCode!: string;
   user!: User;
+  userNameToArray!: Array<string>;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,12 @@ export class MainPageComponent implements OnInit {
           (data) => {
             if (data) {
               this.user = data;
+              this.userNameToArray = this.user.fullName.replace(' ', '-').split('');
+              for (let i = 0; i < this.userNameToArray.length; i++) {
+                if (this.userNameToArray[i] === '-') {
+                  this.userNameToArray[i] = ' ';
+                }
+              }
             }
             console.log(this.user);
           }

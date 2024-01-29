@@ -3,7 +3,7 @@
     <div class="container overflow-hidden mx-5 md:flex flex-wrap" [ngClass]="changeImages ? 'right-panel-active' : 'left-panel-active'">
       <div class="form-container px-3 pt-3">
         <div class="pb-4 md:px-6 bg-white flex items-center justify-center flex-col h-full text-center">
-          <h2 class="font-medium" [@textChange]="changeImages ? 'start' : 'end'">{{ changeImages ? 'Vẫn là Xàmers' : 'Xàmers'}}</h2>
+          <h2 class="font-medium" [@textChange]="changeImages ? 'start' : 'end'">{{ changeImages ? 'Vẫn là Xàmer' : 'Xàmer'}}</h2>
           <div class="av-container overflow-hidden">
             <ng-container *ngFor="let user of users">
               <span class="av bg-no-repeat bg-contain" [ngStyle]="{ backgroundImage: 'url(' + (changeImages ? user.avatar.special : user.avatar.normal) + ')'}">

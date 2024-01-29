@@ -62,47 +62,47 @@ export const users = [
   },
   {
     code: 'HA',
-    fullName: 'Bùi Hà',
+    fullName: 'Hà Bùi',
     avatar: {normal: '/assets/images/ha-normal.jpg', special: '/assets/images/ha-special.jpg'}
   },
   {
     code: 'HIEP',
-    fullName: 'Vũ Hiệp',
+    fullName: 'Hiệp Vũ',
     avatar: {normal: '/assets/images/hiep-normal.jpg', special: '/assets/images/hiep-special.jpg'}
   },
   {
     code: 'TRAN_NAM',
-    fullName: 'Trần Nam',
+    fullName: 'Nam Trần',
     avatar: {normal: '/assets/images/tran-nam-normal.jpg', special: '/assets/images/tran-nam-special.jpg'}
   },
   {
     code: 'NGUYEN_NAM',
-    fullName: 'Nguyễn Nam',
+    fullName: 'Nam Nguyễn',
     avatar: {normal: '/assets/images/nguyen-nam-normal.jpg', special: '/assets/images/nguyen-nam-special.jpg'}
   },
   {
     code: 'NGA',
-    fullName: 'Vũ Nga',
+    fullName: 'Nga Vũ',
     avatar: {normal: '/assets/images/nga-normal.jpg', special: '/assets/images/nga-special.jpg'}
   },
   {
     code: 'LE_NGOC',
-    fullName: 'Lê Ngọc',
+    fullName: 'Ngọc Lê',
     avatar: {normal: '/assets/images/le-ngoc-normal.jpg', special: '/assets/images/le-ngoc-special.jpg'}
   },
   {
     code: 'NGUYEN_NGOC',
-    fullName: 'Nguyễn Ngọc',
+    fullName: 'Ngọc Nguyễn',
     avatar: {normal: '/assets/images/phu-ngoc-normal.jpg', special: '/assets/images/phu-ngoc-special.jpg'}
   },
   {
     code: 'NHUNG',
-    fullName: 'Nguyễn Nhung',
+    fullName: 'Nhung Nguyễn',
     avatar: {normal: '/assets/images/nhung-normal.jpg', special: '/assets/images/nhung-special.jpg'}
   },
   {
     code: 'YEN',
-    fullName: 'Bùi Yến',
+    fullName: 'Yến Bùi',
     avatar: {normal: '/assets/images/yen-normal.jpg', special: '/assets/images/yen-special.jpg'}
   },
 ];
