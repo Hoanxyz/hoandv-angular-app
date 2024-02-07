@@ -3,14 +3,13 @@
 }
 
 .bottom {
-  background-image: url('/assets/images/lucky-money-bg.jpg');
+  background-image: url('/assets/images/bg-lucky-money-2.jpg');
 }
 
 .envelope {
   width: 250px;
-  height: 450px;
+  height: 460px;
   position: relative;
-  background: #ad6605;
   cursor: pointer;
   box-shadow: 0 4px 6px -3px #989898;
 }
@@ -23,19 +22,22 @@
 .top {
   width: 250px;
   height: 60px;
-  background-color: #eabd41;
   border-radius: 10rem 10rem 0 0;
   top: -60px;
   transform-origin: bottom;
   z-index: 3;
   transition: all .8s ease;
   transform: rotateX(0deg);
+  background-image: url('/assets/images/chinese-water-pattern-red-1.png');
+  background-position: center;
+  border: 2px solid #e56276;
+  border-bottom: none;
 }
 
 .bottom {
   top: -60px;
   z-index: 4;
-  height: 450px;
+  height: 460px;
   border: none;
   width: 250px;
 }

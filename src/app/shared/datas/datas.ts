@@ -1,6 +1,6 @@
 export const EVENTS = [
   {
-    title: 'Lên rừng nhưng không xuống biển',
+    title: 'Lên rừng nhưng không xuống biển...',
     time: '22/10/2023',
     content: 'Hơn 10 năm chơi với nhau cũng được thêm 1 chuyến kỷ niệm. Trước khi đi các bạn bảo trải lòng ghê lắm, mà ' +
       'tới chỉ thấy “đồng khởi” “mời hết vòng” “bạn ko nể tôi” ….Chốt được chuyến đi thành công với thời tiết siêu ưng, ' +
@@ -12,7 +12,7 @@ export const EVENTS = [
     thumbnail: 'assets/images/picnic-2.jpg'
   },
   {
-    title: 'Đám cưới thế kỷ',
+    title: 'Đám cưới thế kỷ...',
     time: '02/12/2023',
     content: 'Tôi nhẹ dạ lỡ tin cô gái ấy Hoàng Yến. Hứa đưa đón t thêm vài năm nữa 😌' +
       'Chưa kịp quên mà nay vì chạy KPI lại lỡ bỏ tôi theo a kia. ' +
@@ -25,7 +25,7 @@ export const EVENTS = [
     thumbnail: 'assets/images/cuoi-yen-1.jfif'
   },
   {
-    title: 'Nàng kiều lỡ bước',
+    title: 'Nàng kiều lỡ bước...',
     time: '02/12/2023',
     content: 'Với tư cách quản trị viên #Teamxam ' +
       'Chúc b Ngọc S của chúng mình sang trang mới thật hạnh phúc nha! 🥰' +
@@ -108,15 +108,15 @@ export const users = [
 ];
 
 export enum LuckyMoney {
-  LE_ANH = 'Chúc cậu Lê Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.',
-  NGUYEN_ANH = 'Chúc cậu Nguyễn Tuấn Anh và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.',
+  LE_ANH = 'Chúc cậu Lê Tuấn Anh và gia đình luôn hạnh phúc, sớm sinh cháu cho các bạn bế.',
+  NGUYEN_ANH = 'Chúc cậu Nguyễn Tuấn Anh và gia đình luôn hạnh phúc, sớm sinh cháu cho các bạn bế.',
   HA = 'Chúc Hà luôn xinh đẹp và sớm tìm được người thương để cho các bạn trố mắt.',
-  HIEP = 'Chúc cậu Hiệp và công ty ngày càng phát triển, làm ăn phát đạt.',
+  HIEP = 'Chúc cậu Hiệp và DAM ngày càng phát triển, làm ăn phát đạt.',
   TRAN_NAM = 'Chúc cậu Nam Đa sớm tìm được người thương đi Mẹc, có lâu đài.',
-  NGUYEN_NAM = 'Chúc cậu Nguyễn Nam sớm tìm được người thương, năm nay lên vài bậc và hàm.',
+  NGUYEN_NAM = 'Chúc cậu Nguyễn Nam sớm tìm được người thương, năm nay lên vài bậc vài hàm.',
   NGA = 'Chúc Nga luôn xinh đẹp và sớm tìm anh tổng tài của mình.',
-  LE_NGOC = 'Chúc Ngọc và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.',
-  NGUYEN_NGOC = 'Chúc cậu Phú Ngọc sớm tìm được người thương, lái xe luôn an toàn.',
+  LE_NGOC = 'Chúc Ngọc và gia đình luôn hạnh phúc, sớm sinh cháu cho các bạn bế.',
+  NGUYEN_NGOC = 'Chúc cậu Phú Ngọc sớm tìm được người thương, lái xe an toàn và may mắn.',
   NHUNG = 'Chúc Nhung luôn xinh đẹp và sớm tìm được người thương để cho các bạn được ăn cỗ.',
-  YEN = 'Chúc Yến và gia đình hạnh phúc, sớm sinh cháu cho các bạn bế.'
+  YEN = 'Chúc Yến và gia đình luôn hạnh phúc, sớm sinh cháu cho các bạn bế.'
 }
