@@ -26,7 +26,7 @@
   top: -60px;
   transform-origin: bottom;
   z-index: 3;
-  transition: all .8s ease;
+  transition: all 1s ease;
   transform: rotateX(0deg);
   background-image: url('/assets/images/chinese-water-pattern-red-1.png');
   background-position: center;
@@ -70,7 +70,7 @@
   position: absolute;
   transition: all 1s ease;
   z-index: 3;
-  transition-delay: .4s;
+  transition-delay: 1s;
   top: -27%;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .envelope.fold .top {
-  transition-delay: 1s;
+  transition-delay: 2s;
   transform: rotateX(180deg);
   z-index: 6;
 }
