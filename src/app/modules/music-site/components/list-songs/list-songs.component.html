@@ -1,0 +1,17 @@
+<div>
+  <div *ngFor="let song of listSongs, let i = index" class="flex w-fit items-center">
+    <p>{{ i + 1}}. </p>
+    <p>{{ song.name }}</p>
+    <button mat-fab color="primary" (click)="playSong(song.id)" aria-label="Play this song">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+  </div>
+</div>
+<div>
+  <input type="file" (change)="onFileSelected($event)" accept=".mp3, .m4a">
+  <button mat-fab color="accent" (click)="onUpload()" [disabled]="!selectedFile"
+          aria-label="Upload song (mp3 and m4a only)">
+    <mat-icon>upload</mat-icon>
+  </button>
+</div>
+<audio #audio src="{{ audioSource }}" loop [controls]="true"></audio>
