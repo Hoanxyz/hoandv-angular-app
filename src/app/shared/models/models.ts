@@ -16,3 +16,8 @@ export interface User {
   fullName: string;
   avatar: Avatar;
 }
+
+export interface PageAble {
+  page: number;
+  size: number;
+}
