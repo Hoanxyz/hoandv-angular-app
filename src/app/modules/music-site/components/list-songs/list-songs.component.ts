@@ -1,6 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MusicService} from "../../shared/services/music.service";
 import {PageAble} from "../../../../shared/models/models";
+import {SongTableComponent} from "../song-table/song-table.component";
+import {SharedService} from "../../shared/services/shared.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AlertDialogComponent} from "../../../../shared/components/alert-dialog/alert-dialog.component";
 
 @Component({
   selector: 'app-list-songs',
@@ -8,116 +12,57 @@ import {PageAble} from "../../../../shared/models/models";
   styleUrls: ['./list-songs.component.scss']
 })
 
-export class ListSongsComponent implements OnInit {
-  @ViewChild('audio') audio!: ElementRef<HTMLAudioElement>;
+export class ListSongsComponent implements OnInit, AfterViewInit {
+  @ViewChild(SongTableComponent) songTable!: SongTableComponent;
   selectedFile: File | null = null;
-  listSongs: any;
-  listSearchSongs: any;
-  songPlayingName: string = '';
   pageAble: PageAble = {
     page: 0,
-    size: 2
+    size: 2,
+    textSearch: '',
   }
-  currentPage = 0;
-  totalSongs!: number;
-  totalPages!: number;
-  searchText!: '';
   constructor(
-    private musicService: MusicService
+    private musicService: MusicService,
+    private sharedService: SharedService,
+    public dialog: MatDialog
   ) {
   }
 
-  data: any;
-  audioSource: any;
+  ngAfterViewInit(): void {
+    this.songTable.searchSong();
+  }
 
   ngOnInit(): void {
-    this.getAllSong();
-    this.getSong(this.pageAble);
-  }
-
-  getAllSong() {
-    this.musicService.getAllSongs().subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
+    this.sharedService.reloadListSongs$.subscribe(data => {
+      if (data) {
+        this.songTable.searchSong();
       }
-    );
-  }
-
-  getSong(pageable: PageAble) {
-    this.musicService.getSongs(pageable).subscribe(
-      (res) => {
-        console.log(res);
-        this.listSongs = res.content;
-        this.totalSongs = res.totalElements;
-        this.totalPages = res.totalPages;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  prepareToPlay() {
-    const audioBlob = new Blob([this.data], { type: 'audio/mp3' });
-    this.audioSource = URL.createObjectURL(audioBlob);
-    setTimeout(() => {
-      this.audio.nativeElement.play();
-    }, 1000);
+    })
   }
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    if (event.target.files[0].size >= 20000000)
+    this.dialog.open(AlertDialogComponent, {
+      data: {
+        content: 'Cho cái file be bé thôi (<30MB)'
+      }
+    })
   }
 
   onUpload(): void {
-    if (this.selectedFile) {
+    if (this.selectedFile && (this.selectedFile.size < 30000000)) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
       this.musicService.uploadSong(formData).subscribe(
         (response) => {
           console.log('File uploaded successfully.');
-          this.getAllSong();
+          this.songTable.searchSong();
         },
         (error) => {
           console.error('Error uploading file:', error);
         }
       );
     }
-  }
-
-  playSong(id: number, name: string) {
-    this.musicService.getSong(id).subscribe(
-      (res) => {
-        console.log(res);
-        this.data = res;
-        this.songPlayingName = name;
-        this.prepareToPlay();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  changePage(evt: any) {
-    this.pageAble.page = evt.pageIndex;
-    this.currentPage = evt.pageIndex;
-    this.getSong(this.pageAble);
-  }
-
-  searchSong() {
-    this.musicService.searchSongs({page: 0, size: 2, text: this.searchText}).subscribe(
-      (res) => {
-        console.log(res);
-        this.listSearchSongs = res.content;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 }

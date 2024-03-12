@@ -1,63 +1,22 @@
-<div class="pb-28 max-w-screen-xl px-3 md:px-5 lg:px-8 mx-auto font-mali">
-  <h1 class="text-3xl md:text-5xl lg:text-6xl mb-8 text-center pt-5">My Favorite Songs</h1>
-  <div class="md:flex">
-    <div class="w-1/2">
-      <div class="mb-8 flex items-center">
-        <input class="max-w-60" type="file" (change)="onFileSelected($event)" accept=".mp3, .m4a">
-        <button class="!w-10 !h-10" mat-fab color="accent" (click)="onUpload()" [disabled]="!selectedFile"
-                aria-label="Upload song (mp3 and m4a only)">
-          <mat-icon>upload</mat-icon>
-        </button>
+<div class="pb-28 mb-2 md:mb-0 max-w-screen-xl px-3 md:px-5 lg:px-8 mx-auto font-mali">
+  <div class="mb-8 lg:mb-10 border-b border-neutral-700 md:border-0 pb-8 md:pb-0">
+    <h1 class="text-3xl md:text-5xl lg:text-6xl mb-8 lg:mb-10 text-center pt-5 font-semibold">My Favorite Songs</h1>
+    <div class="md:flex">
+      <div class="md:w-1/2 mb-8 md:mb-0 border-b border-neutral-700 md:border-0 pb-8 md:pb-0">
+        <h2 class="text-2xl md:text-3xl mb-4 lg:mb-8">All Songs</h2>
+        <app-song-table [pageAble]="pageAble"></app-song-table>
       </div>
-      <div>
-        <h2 class="text-2xl md:text-3xl mb-4">All Songs</h2>
-        <div>
-          <div *ngFor="let song of listSongs, let i = index" class="flex w-fit items-center mb-2 last:mb-0">
-            <p class="mr-2">{{ currentPage * pageAble.size + i + 1}}. </p>
-            <p class="mr-3">{{ song.name | removeExtension }}</p>
-            <button class="!w-10 !h-10" mat-fab color="accent" (click)="playSong(song.id, song.name)"
-                    aria-label="Play this song">
-              <mat-icon>play_arrow</mat-icon>
-            </button>
-          </div>
-        </div>
-        <mat-paginator [length]="totalSongs"
-                       [pageSize]="pageAble.size"
-                       [pageSizeOptions]="[2, 5, 10, 25, 50]"
-                       [pageIndex]="currentPage"
-                       (page)="changePage($event)"
-                       aria-label="Select page">
-        </mat-paginator>
-      </div>
-    </div>
-    <div class="w-1/2">
-      <div class="flex justify-between items-center">
-        <mat-form-field class="w-3/4">
-          <mat-label>Search</mat-label>
-          <input matInput placeholder="Golden Hour" [(ngModel)]="searchText" value="">
-        </mat-form-field>
-        <button class="!w-10 !h-10" mat-fab color="accent" (click)="searchSong()"
-                aria-label="Play this song">
-          <mat-icon>search</mat-icon>
-        </button>
-      </div>
-      <div>
-        <div *ngFor="let song of listSearchSongs, let i = index" class="flex w-fit items-center mb-2 last:mb-0">
-          <p class="mr-2">{{ currentPage * pageAble.size + i + 1}}. </p>
-          <p class="mr-3">{{ song.name | removeExtension }}</p>
-          <button class="!w-10 !h-10" mat-fab color="accent" (click)="playSong(song.id, song.name)"
-                  aria-label="Play this song">
-            <mat-icon>play_arrow</mat-icon>
-          </button>
-        </div>
+      <div class="md:w-1/2 md:pl-10 lg:pl-20">
+        <app-search-bar></app-search-bar>
       </div>
     </div>
   </div>
-
-  <div class="fixed bottom-0 left-0 w-full flex justify-between bg-pink-500">
-    <div class="m-auto py-4 md:flex items-center w-fit">
-      <p class="font-medium text-white mr-2 text-center mb-2 md:mb-0" *ngIf="songPlayingName">{{ songPlayingName | removeExtension}}</p>
-      <audio #audio src="{{ audioSource }}" loop [controls]="true"></audio>
-    </div>
+  <div class="flex items-center">
+    <input class="max-w-60" type="file" (change)="onFileSelected($event)" accept=".mp3, .m4a, .flac">
+    <button class="!w-10 !h-10" mat-fab color="accent" (click)="onUpload()" [disabled]="!selectedFile"
+            aria-label="Upload song (mp3 and m4a only)">
+      <mat-icon>upload</mat-icon>
+    </button>
   </div>
+  <app-play-bar></app-play-bar>
 </div>

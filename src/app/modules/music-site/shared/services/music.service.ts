@@ -33,4 +33,8 @@ export class MusicService {
   uploadSong(formData: any): Observable<any> {
     return this.http.post<any>(`${listApis.local}/song/create`, formData)
   }
+
+  deleteSong(id: number): Observable<any> {
+    return this.http.post<any>(`${listApis.local}/song/delete/${id}`, {});
+  }
 }

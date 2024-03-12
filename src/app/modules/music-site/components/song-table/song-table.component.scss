@@ -1,0 +1,4 @@
+.song-name {
+  @apply inline-block whitespace-nowrap overflow-ellipsis;
+  max-width: 140px;
+}

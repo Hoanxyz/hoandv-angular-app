@@ -8,12 +8,18 @@ import {RemoveExtensionPipe} from "../../shared/pipes/remove-extension.pipe";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { PlayBarComponent } from './components/play-bar/play-bar.component';
+import { SongTableComponent } from './components/song-table/song-table.component';
 
 @NgModule({
   declarations: [
     ListSongsComponent,
-    RemoveExtensionPipe
+    RemoveExtensionPipe,
+    SearchBarComponent,
+    PlayBarComponent,
+    SongTableComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +29,8 @@ import {FormsModule} from "@angular/forms";
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MusicSiteModule { }

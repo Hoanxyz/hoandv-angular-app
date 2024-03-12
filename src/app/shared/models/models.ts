@@ -20,4 +20,5 @@ export interface User {
 export interface PageAble {
   page: number;
   size: number;
+  textSearch?: string;
 }

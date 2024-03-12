@@ -8,10 +8,11 @@ import {NewYearRoutingModule} from "./modules/new-year/new-year-routing.module";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ApiService} from "./shared/services/services.service";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +21,9 @@ import {HttpClientModule} from "@angular/common/http";
     NewYearModule,
     NewYearRoutingModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     ApiService

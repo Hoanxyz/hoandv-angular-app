@@ -1,0 +1,22 @@
+<div class="mb-2">
+  <div *ngFor="let song of listSongs, let i = index" class="flex w-fit items-center mb-2 last:mb-0">
+    <p class="mr-2">{{ pageAble.page * pageAble.size + i + 1}}. </p>
+    <p class="mr-3 song-name">{{ song.name | removeExtension }}</p>
+    <button class="!w-10 !h-10 mr-2" mat-fab color="accent"
+            (click)="playSong(song.id, song.name)"
+            aria-label="Play this song">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <button *ngIf="showDelete" class="!w-10 !h-10" mat-fab color="primary" aria-label="Delete song"
+    (click)="openDialog(song.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-paginator [length]="totalSongs"
+               [pageSize]="pageAble.size"
+               [pageSizeOptions]="[2, 5, 10, 25, 50]"
+               [pageIndex]="pageAble.page"
+               (page)="changePage($event)"
+               aria-label="Select page">
+</mat-paginator>
