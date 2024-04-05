@@ -1,0 +1,31 @@
+<div class="font-mali mb-8 lg:mb-10 sticky top-0 z-20" style="background: #6ac9cd;">
+  <div class="py-1 text-white">
+    <div class="flex justify-end items-center relative h-20 max-w-screen-xl mx-auto py-5">
+      <div></div>
+      <div class="absolute custom-item-center">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl text-center font-semibold">{{title}}</h1>
+      </div>
+      <div>
+        <div class="flex items-center" *ngIf="user; else loginBlock">
+          <div class="mr-2">
+            <span class="font-semibold">Hellu {{user?.lastname}}</span>
+          </div>
+          <div>
+            <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon !flex items-center justify-between">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Đăng xuất</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <ng-template #loginBlock>
+          <div class="font-semibold cursor-pointer" (click)="goToLogin()">Login</div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

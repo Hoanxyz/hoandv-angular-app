@@ -12,6 +12,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { PlayBarComponent } from './components/play-bar/play-bar.component';
 import { SongTableComponent } from './components/song-table/song-table.component';
+import { MusicComponent } from './components/music/music.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { HeaderMusicComponent } from './components/header-music/header-music.component';
+import {HeaderComponent} from "../../shared/components/header/header.component";
+import {MatMenuModule} from "@angular/material/menu";
+import {LoginPopupComponent} from "../../shared/components/login-popup/login-popup.component";
+import { LoginMusicComponent } from './components/login-music/login-music.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +26,12 @@ import { SongTableComponent } from './components/song-table/song-table.component
     RemoveExtensionPipe,
     SearchBarComponent,
     PlayBarComponent,
-    SongTableComponent
+    SongTableComponent,
+    MusicComponent,
+    HeaderMusicComponent,
+    HeaderComponent,
+    LoginPopupComponent,
+    LoginMusicComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +42,9 @@ import { SongTableComponent } from './components/song-table/song-table.component
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule,
+    MatMenuModule,
   ]
 })
 export class MusicSiteModule { }

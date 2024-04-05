@@ -9,13 +9,13 @@ const routes: Routes = [
     loadChildren: () => import('./modules/new-year/new-year.module').then((m) => NewYearModule)
   },
   {
-    path: '',
-    redirectTo: 'new-year/intro',
-    pathMatch: 'full'
+    path: 'music',
+    loadChildren: () => import('./modules/music-site/music-site.module').then((m) => MusicSiteModule)
   },
   {
-    path: 'list-songs',
-    loadChildren: () => import('./modules/music-site/music-site.module').then((m) => MusicSiteModule)
+    path: '',
+    redirectTo: 'music',
+    pathMatch: 'full'
   }
 ];
 

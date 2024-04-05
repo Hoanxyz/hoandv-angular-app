@@ -22,3 +22,9 @@ export interface PageAble {
   size: number;
   textSearch?: string;
 }
+
+export interface IUrl {
+  title: string;
+  url: string;
+  icon?: string
+}

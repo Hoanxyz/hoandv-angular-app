@@ -1,6 +1,7 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SharedService} from "../../shared/services/shared.service";
 import {MusicService} from "../../shared/services/music.service";
+import {PlayMode} from "../../shared/constants/music.constant";
 
 @Component({
   selector: 'app-play-bar',
@@ -12,6 +13,7 @@ export class PlayBarComponent implements OnInit {
   songPlayingName = '';
   dataSong: any;
   audioSource = '';
+  playMode = PlayMode.NoRepeat;
 
   constructor(
     private sharedService: SharedService,

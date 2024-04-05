@@ -12,7 +12,7 @@ export class SearchBarComponent {
   @ViewChild(SongTableComponent) songTable!: SongTableComponent;
   pageAble: PageAble = {
     page: 0,
-    size: 2,
+    size: 5,
     textSearch: '',
   }
 

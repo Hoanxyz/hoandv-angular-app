@@ -17,7 +17,7 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
   selectedFile: File | null = null;
   pageAble: PageAble = {
     page: 0,
-    size: 2,
+    size: 5,
     textSearch: '',
   }
   constructor(
@@ -41,16 +41,16 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
-    if (event.target.files[0].size >= 20000000)
+    if (event.target.files[0].size >= 40000000)
     this.dialog.open(AlertDialogComponent, {
       data: {
-        content: 'Cho cái file be bé thôi (<30MB)'
+        content: 'Cho cái file be bé thôi (<40MB)'
       }
     })
   }
 
   onUpload(): void {
-    if (this.selectedFile && (this.selectedFile.size < 30000000)) {
+    if (this.selectedFile && (this.selectedFile.size < 40000000)) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
