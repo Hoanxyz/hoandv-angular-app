@@ -37,8 +37,8 @@ export class ApiService {
     return this.http.post<any>(`${listApis.local}/user/update/${id}`, userData)
   }
 
-  setNewDataUser(username: string): void {
-    this.getUserByName(username).subscribe(
+  setNewDataUser(name: string): void {
+    this.getUserByName({name}).subscribe(
       (res) => {
         localStorage.setItem('currentUser', JSON.stringify(res));
       },
