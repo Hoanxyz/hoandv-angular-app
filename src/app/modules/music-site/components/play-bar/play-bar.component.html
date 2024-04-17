@@ -1,6 +1,17 @@
-<div class="fixed bottom-0 left-0 w-full flex justify-between z-10" style="background: #6ac9cd;">
+<div class="fixed bottom-0 left-0 w-full flex justify-between z-10 beautiful-bg">
   <div class="m-auto py-4 md:flex items-center w-fit">
     <p class="font-medium text-white mr-2 text-center mb-2 md:mb-0" *ngIf="songPlayingName">{{ songPlayingName | removeExtension}}</p>
-    <audio #audio src="{{ audioSource }}" loop [controls]="true"></audio>
+    <div class="flex justify-center">
+      <audio class="max-w-80% md:max-w-none" #audio  src="{{ audioSource }}" [controls]="true" (ended)="handleAudioEnd()">
+      </audio>
+      <div class="w-1 h-full"></div>
+      <div class="flex items-center">
+        <button class="flex" (click)="changePlayType()">
+          <mat-icon [class]="playMode == playModes.NoRepeat ? 'text-gray-500' : 'text-white'">
+            {{ iconPlayMode }}
+          </mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

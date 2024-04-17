@@ -5,6 +5,7 @@ import {SongTableComponent} from "../song-table/song-table.component";
 import {SharedService} from "../../shared/services/shared.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AlertDialogComponent} from "../../../../shared/components/alert-dialog/alert-dialog.component";
+import {ListPlay} from "../../shared/constants/music.constant";
 
 @Component({
   selector: 'app-list-songs',
@@ -15,6 +16,7 @@ import {AlertDialogComponent} from "../../../../shared/components/alert-dialog/a
 export class ListSongsComponent implements OnInit, AfterViewInit {
   @ViewChild(SongTableComponent) songTable!: SongTableComponent;
   selectedFile: File | null = null;
+  listPlay = ListPlay;
   pageAble: PageAble = {
     page: 0,
     size: 5,

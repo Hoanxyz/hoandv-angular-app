@@ -21,6 +21,8 @@ export interface PageAble {
   page: number;
   size: number;
   textSearch?: string;
+  ids?: number[];
+  userId?: number | null;
 }
 
 export interface IUrl {

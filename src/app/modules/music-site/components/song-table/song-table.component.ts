@@ -5,6 +5,8 @@ import {SharedService} from "../../shared/services/shared.service";
 import {ConfirmDialogComponent} from "../../../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ApiService} from "../../../../shared/services/services.service";
+import {ListPlay} from "../../shared/constants/music.constant";
+import {ISongResponse} from "../../shared/models/music-models";
 
 @Component({
   selector: 'app-song-table',
@@ -14,11 +16,15 @@ import {ApiService} from "../../../../shared/services/services.service";
 export class SongTableComponent implements OnInit {
   @Input() pageAble!: PageAble;
   @Input() showDelete = true;
+  @Input() playFromList = "ALL";
+  @Input() classAdd = "";
   @Output() playSelectedSong = new EventEmitter<number>();
-  listSongs: any;
+  listSongs: ISongResponse[] = [];
   totalSongs!: number;
-  listFavSongs: string[] = [];
+  listFavSongs: number[] = [];
   isLogged = false;
+  userId = -1;
+  listPlay = ListPlay;
 
   constructor(
     private musicService: MusicService,
@@ -31,28 +37,59 @@ export class SongTableComponent implements OnInit {
   ngOnInit(): void {
     this.isLogged = !!this.apiService.getCurrentUser();
     if (this.isLogged) {
-      this.getListFav();
+      this.userId = this.apiService.getCurrentUser().id;
+      this.updateListFavSongs();
+      this.sharedService.addToFav$.subscribe(() => {
+        this.updateListFavSongs();
+        if (this.playFromList == this.listPlay.FAV) {
+          this.searchSong();
+        }
+      });
     }
   }
 
-  getListFav() {
-    this.listFavSongs = this.apiService.getCurrentUser().songIds.split(",");
+  updateListFavSongs(): void {
+    this.musicService.findFavSongIdsByUserId(this.userId).subscribe(
+      (res) => {
+        this.listFavSongs = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
   }
+
 
   searchSong() {
-    this.musicService.searchSongs(this.pageAble).subscribe(
-      (res) => {
-        this.listSongs = res.content;
-        this.totalSongs = res.totalElements;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (this.isLogged) {
+      this.pageAble.userId = this.userId;
+    }
+    if (this.playFromList == this.listPlay.FAV) {
+      this.musicService.getListFav(this.pageAble).subscribe(
+        (res) => {
+          this.listSongs = res.content;
+          this.totalSongs = res.totalElements;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.musicService.searchSongs(this.pageAble).subscribe(
+        (res) => {
+          this.listSongs = res.content;
+          this.totalSongs = res.totalElements;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
-  playSong(id: number, name: string) {
-    this.sharedService.emitPlaySongEvent({id: id, name: name});
+  playSong(id: number) {
+    localStorage.setItem("listPlay", this.playFromList);
+    this.sharedService.emitPlaySongEvent(id);
   }
 
   changePage(evt: any) {
@@ -77,39 +114,43 @@ export class SongTableComponent implements OnInit {
     });
   }
 
-  addToFavor(id: string) {
-    const currentUser = this.apiService.getCurrentUser();
-    let newFavList;
-    const songIds = currentUser.songIds;
-    if (songIds) {
-      let listSongIds = songIds.split(',');
-      if (listSongIds.includes(id.toString())) {
-        // remove song
-        listSongIds = listSongIds.filter(function(item: any) {
-          return item !== id.toString();
-        })
-
-        newFavList = listSongIds.join(",");
-      } else {
-        // add song
-        newFavList = songIds + `,${id}`;
-      }
-    } else {
-      newFavList = `${id}`;
+  addToFavor(id: number) {
+    const data = {
+      userId : this.userId,
+      songId: id
     }
-    currentUser.songIds = newFavList;
-    this.apiService.updateUser(currentUser, currentUser.id).subscribe(
-      (res) => {
-        localStorage.setItem('currentUser', JSON.stringify(res));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    if (this.listFavSongs.includes(id)) {
+      this.musicService.deleteFav(data).subscribe(
+        (res) => {
+          console.log("delete fav success");
+          this.updateListFavSongs();
+          if (this.playFromList == this.listPlay.FAV) {
+            this.searchSong();
+          }
+          this.sharedService.emmitAddToFav();
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    } else {
+      this.musicService.addToFav(data).subscribe(
+        (res) => {
+          console.log("add to fav success");
+          this.updateListFavSongs();
+          if (this.playFromList == this.listPlay.FAV) {
+            this.searchSong();
+          }
+          this.sharedService.emmitAddToFav();
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
   }
 
-  isFav(id: string): boolean {
-    this.getListFav();
-    return this.listFavSongs.includes(id.toString());
+  isFav(id: number): boolean {
+    return this.listFavSongs.includes(id);
   }
 }

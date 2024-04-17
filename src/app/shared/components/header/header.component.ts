@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {IUrl} from "../../models/models";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,10 @@ export class HeaderComponent implements OnInit {
   @Input() logoutRedirect!: string;
   user: any;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private sharedService: SharedService
+    ) {
   }
 
   ngOnInit(): void {
@@ -31,5 +35,9 @@ export class HeaderComponent implements OnInit {
 
   goToLogin(): void {
     this.router.navigate([this.loginRedirect]);
+  }
+
+  toggleSearch() {
+    this.sharedService.emmitToggleSearch();
   }
 }

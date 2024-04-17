@@ -13,6 +13,9 @@ module.exports = {
         mali: ['"Mali", cursive'],
         dancing: ['"Dancing Script", cursive'],
         sansita: ['"Sansita Swashed", system-ui']
+      },
+      spacing: {
+        '80%': '80%',
       }
     },
   },
@@ -28,6 +31,10 @@ module.exports = {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           position: 'absolute'
+        },
+        '.beautiful-bg': {
+          backgroundColor: '#A9C9FF',
+          backgroundImage: 'linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%)'
         }
       })
     })

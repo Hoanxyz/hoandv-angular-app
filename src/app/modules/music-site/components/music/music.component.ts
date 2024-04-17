@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
+import {ListPlay} from "../../shared/constants/music.constant";
 
 @Component({
   selector: 'app-music',
@@ -8,6 +9,7 @@ import { filter, pairwise } from 'rxjs/operators';
   styleUrls: ['./music.component.scss']
 })
 export class MusicComponent implements OnInit {
+
   constructor(private router: Router) {
     this.router.navigate(["music/list-songs"]);
     this.router.events
@@ -16,10 +18,11 @@ export class MusicComponent implements OnInit {
         pairwise()
       )
       .subscribe((event: any[]) => {
-        console.log(event[0].urlAfterRedirects)
+        console.log(event[0].urlAfterRedirects);
       });
   }
 
   ngOnInit(): void {
+    localStorage.setItem("listPlay", ListPlay.ALL);
   }
 }

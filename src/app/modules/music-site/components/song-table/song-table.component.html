@@ -1,30 +1,38 @@
-<div class="mb-2">
-  <ng-container *ngFor="let song of listSongs, let i = index">
-    <div class="flex w-fit items-center mb-3 last:mb-0"
-         matTooltip="{{ song.name | removeExtension }}"
-         [matTooltipPosition]="'above'">
-      <button *ngIf="isLogged" class="" mat-icon-button [color]="isFav(song.id) ? 'accent' : 'primary'" aria-label="Favorite song" (click)="addToFavor(song.id)">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <p class="mx-2">{{ pageAble.page * pageAble.size + i + 1}}. </p>
-      <p class="mr-3 song-name">
-        {{ song.name | removeExtension }}</p>
-      <button class="!w-8 !h-8 mr-2" mat-fab color="accent"
-              (click)="playSong(song.id, song.name)"
-              aria-label="Play this song">
-        <mat-icon>play_arrow</mat-icon>
-      </button>
-      <button *ngIf="showDelete" class="!w-8 !h-8" mat-fab color="primary" aria-label="Delete song"
-              (click)="openDialog(song.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-  </ng-container>
+<div class="{{classAdd}}" [hidden]="listSongs.length == 0">
+  <div class="mb-2">
+    <ng-container *ngFor="let song of listSongs, let i = index">
+      <div class="flex w-fit items-center mb-1.5 last:mb-0"
+           matTooltip="{{ song.name | removeExtension }}"
+           [matTooltipPosition]="'above'">
+        <button *ngIf="isLogged" class="!flex" mat-icon-button
+                aria-label="Favorite song"
+                (click)="addToFavor(song.id)">
+          <mat-icon [class]="isFav(song.id) ? 'text-pink-600' : 'text-gray-400'">favorite</mat-icon>
+        </button>
+<!--        <p class="mx-2">{{ pageAble.page * pageAble.size + i + 1}}. </p>-->
+        <p class="mr-3 song-name">
+          {{ song.name | removeExtension }}</p>
+        <div>
+          <button class="!w-8 !h-8 mr-2" mat-fab color="accent"
+                  (click)="playSong(song.id)"
+                  aria-label="Play this song">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+          <button *ngIf="showDelete" class="!w-8 !h-8" mat-fab color="primary" aria-label="Delete song"
+                  (click)="openDialog(song.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div [hidden]="totalSongs <= pageAble.size">
+    <mat-paginator [length]="totalSongs"
+                   [pageSize]="pageAble.size"
+                   [pageSizeOptions]="[5, 10, 25, 50]"
+                   [pageIndex]="pageAble.page"
+                   (page)="changePage($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
 </div>
-<mat-paginator [length]="totalSongs"
-               [pageSize]="pageAble.size"
-               [pageSizeOptions]="[2, 5, 10, 25, 50]"
-               [pageIndex]="pageAble.page"
-               (page)="changePage($event)"
-               aria-label="Select page">
-</mat-paginator>

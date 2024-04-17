@@ -19,6 +19,7 @@ import {HeaderComponent} from "../../shared/components/header/header.component";
 import {MatMenuModule} from "@angular/material/menu";
 import {LoginPopupComponent} from "../../shared/components/login-popup/login-popup.component";
 import { LoginMusicComponent } from './components/login-music/login-music.component';
+import { FavoriteListComponent } from './components/favorite-list/favorite-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoginMusicComponent } from './components/login-music/login-music.compon
     HeaderMusicComponent,
     HeaderComponent,
     LoginPopupComponent,
-    LoginMusicComponent
+    LoginMusicComponent,
+    FavoriteListComponent
   ],
   imports: [
     CommonModule,
