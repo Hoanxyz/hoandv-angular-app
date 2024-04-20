@@ -65,15 +65,17 @@ export class SongTableComponent implements OnInit {
       this.pageAble.userId = this.userId;
     }
     if (this.playFromList == this.listPlay.FAV) {
-      this.musicService.getListFav(this.pageAble).subscribe(
-        (res) => {
-          this.listSongs = res.content;
-          this.totalSongs = res.totalElements;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      if (this.isLogged) {
+        this.musicService.getListFav(this.pageAble).subscribe(
+          (res) => {
+            this.listSongs = res.content;
+            this.totalSongs = res.totalElements;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
     } else {
       this.musicService.searchSongs(this.pageAble).subscribe(
         (res) => {

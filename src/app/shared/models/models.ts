@@ -30,3 +30,8 @@ export interface IUrl {
   url: string;
   icon?: string
 }
+
+export interface ITabsSidebar {
+  title: string;
+  tab: string;
+}

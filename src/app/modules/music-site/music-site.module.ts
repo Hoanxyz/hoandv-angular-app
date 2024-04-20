@@ -20,6 +20,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import {LoginPopupComponent} from "../../shared/components/login-popup/login-popup.component";
 import { LoginMusicComponent } from './components/login-music/login-music.component';
 import { FavoriteListComponent } from './components/favorite-list/favorite-list.component';
+import { MusicDashboardComponent } from './components/music-dashboard/music-dashboard.component';
+import { MusicUserInfoComponent } from './components/music-dashboard/music-user-info/music-user-info.component';
+import { MusicUserUpdateComponent } from './components/music-dashboard/music-user-update/music-user-update.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { FavoriteListComponent } from './components/favorite-list/favorite-list.
     HeaderComponent,
     LoginPopupComponent,
     LoginMusicComponent,
-    FavoriteListComponent
+    FavoriteListComponent,
+    MusicDashboardComponent,
+    MusicUserInfoComponent,
+    MusicUserUpdateComponent
   ],
   imports: [
     CommonModule,

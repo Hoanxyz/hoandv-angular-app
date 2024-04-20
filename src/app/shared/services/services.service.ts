@@ -4,11 +4,13 @@ import {User} from "../models/models";
 import {users} from '../datas/datas'
 import {HttpClient} from "@angular/common/http";
 import {listApis} from "./global-variables.constant";
+import {SharedService} from "./shared.service";
 
 @Injectable()
 export class ApiService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private sharedService: SharedService
   ) {}
 
   getUser(userCode: string): Observable<User | undefined> {
@@ -33,14 +35,15 @@ export class ApiService {
     return this.http.get<any>(`${listApis.local}/user/get-user-by-name`, {params: {...params}})
   }
 
-  updateUser(userData: any, id: any): Observable<any> {
-    return this.http.post<any>(`${listApis.local}/user/update/${id}`, userData)
+  updateUser(userData: any, id: any, oldPass: string): Observable<any> {
+    return this.http.post<any>(`${listApis.local}/user/update/${id}?password=${oldPass}`, userData)
   }
 
   setNewDataUser(name: string): void {
     this.getUserByName({name}).subscribe(
       (res) => {
         localStorage.setItem('currentUser', JSON.stringify(res));
+        this.sharedService.emmitReloadUser();
       },
       (err) => {
         console.log(err);

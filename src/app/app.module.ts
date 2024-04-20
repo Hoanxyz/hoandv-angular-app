@@ -14,10 +14,18 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {AuthInterceptor} from "./shared/services/jwt.interceptor";
+import { UserDashboardComponent } from './shared/components/user-dashboard/user-dashboard.component';
+import { DashboardSidebarComponent } from './shared/components/user-dashboard/dashboard-sidebar/dashboard-sidebar.component';
+import { DashboardUpdateAccountComponent } from './shared/components/user-dashboard/dashboard-update-account/dashboard-update-account.component';
+import { DashboardUserInfoComponent } from './shared/components/user-dashboard/dashboard-user-info/dashboard-user-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserDashboardComponent,
+    DashboardSidebarComponent,
+    DashboardUpdateAccountComponent,
+    DashboardUserInfoComponent,
   ],
   imports: [
     BrowserModule,

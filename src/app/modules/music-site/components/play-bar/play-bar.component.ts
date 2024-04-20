@@ -98,7 +98,6 @@ export class PlayBarComponent implements OnInit {
   getSongAndPlay(id: number) {
     this.musicService.getSong(id).subscribe(
       (res) => {
-        console.log(res);
         this.currentPlay = parseInt(id.toString());
         this.dataSong = res.body;
         const contentDisposition = res.headers.get('content-disposition');

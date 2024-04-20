@@ -11,7 +11,6 @@ import {ListPlay} from "../../shared/constants/music.constant";
 export class MusicComponent implements OnInit {
 
   constructor(private router: Router) {
-    this.router.navigate(["music/list-songs"]);
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),

@@ -13,7 +13,9 @@ export class HeaderComponent implements OnInit {
   @Input() listUrls!: IUrl[];
   @Input() loginRedirect!: string;
   @Input() logoutRedirect!: string;
+  @Input() logoLink!: string
   user: any;
+  baseURL = document.baseURI;
 
   constructor(
     private router: Router,
@@ -22,6 +24,15 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.innitUser();
+    this.sharedService.reloadUser$.subscribe(
+      () => {
+        this.innitUser();
+      }
+    )
+  }
+
+  innitUser() {
     const userData = localStorage.getItem("currentUser");
     this.user = userData ? JSON.parse(userData) : null;
   }
@@ -39,5 +50,10 @@ export class HeaderComponent implements OnInit {
 
   toggleSearch() {
     this.sharedService.emmitToggleSearch();
+  }
+
+  changeLocation(url: string) {
+    console.log(url);
+    this.router.navigate([url]);
   }
 }
