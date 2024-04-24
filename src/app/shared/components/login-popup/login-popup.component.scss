@@ -12,7 +12,7 @@ p {
   font-weight: 100;
   line-height: 20px;
   letter-spacing: 0.5px;
-  margin: 20px 0 30px;
+  margin: 16px 0;
 }
 
 span {
@@ -54,13 +54,22 @@ button.ghost {
 
 form {
   background-color: #FFFFFF;
-  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding: 24px;
   height: 100%;
   text-align: center;
+}
+
+form::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+form {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .container {
@@ -125,8 +134,7 @@ form {
 .overlay-container {
   top: 0;
   left: 50%;
-  @apply w-[200%] md:w-1/2 md:absolute -order-1;
-  height: 100%;
+  @apply w-[200%] md:w-1/2 md:absolute -order-1 h-max md:h-full;
   overflow: hidden;
   transition: transform 0.6s ease-in-out;
   z-index: 100;
@@ -145,10 +153,9 @@ form {
   background-position: 0 0;
   color: #FFFFFF;
   position: relative;
-  height: 100%;
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
-  @apply md:-left-full w-full md:w-[200%] flex py-3 md:py-0;
+  @apply md:-left-full w-full md:w-[200%] flex py-3 md:py-0 h-max md:h-full;
 }
 
 .container.right-panel-active .overlay {
@@ -163,10 +170,9 @@ form {
   padding: 0 40px;
   text-align: center;
   top: 0;
-  height: 100%;
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
-  @apply md:absolute w-1/2 md:w-1/2;
+  @apply md:absolute w-1/2 md:w-1/2 h-max md:h-full;
 }
 
 .overlay-left {

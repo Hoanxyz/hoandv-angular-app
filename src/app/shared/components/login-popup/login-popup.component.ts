@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Avatar, User} from "../../models/models";
-import {FormBuilder, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
@@ -46,13 +46,18 @@ export class LoginPopupComponent {
     username: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
-  registerForm = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    firstname: [''],
-    lastname: [''],
-    email: ['', [Validators.required, Validators.email]],
-  })
+  registerForm = this.fb.group(
+    {
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: [null],
+      firstname: [''],
+      lastname: [''],
+      email: ['', [Validators.required, Validators.email]],
+    },{
+      validators: this.passwordMatchValidator
+    }
+  )
 
   constructor(
     public dialog: MatDialog,
@@ -61,6 +66,18 @@ export class LoginPopupComponent {
     public apiService: ApiService
   ) {
   }
+
+  private passwordMatchValidator(control: AbstractControl) {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      control.get('confirmPassword')?.setErrors({ passwordMismatch: true });
+    } else {
+      control.get('confirmPassword')?.setErrors(null);
+    }
+  }
+
 
   changePos() {
     this.isSignIn = !this.isSignIn;
@@ -110,6 +127,7 @@ export class LoginPopupComponent {
     if (this.registerForm.invalid) {
       return;
     }
+    this.registerForm.removeControl("confirmPassword");
     const userData = this.registerForm.getRawValue();
     this.apiService.createUser(userData).subscribe(
       (res) => {

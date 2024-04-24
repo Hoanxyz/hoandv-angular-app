@@ -19,7 +19,6 @@ export class PlayBarComponent implements OnInit {
   iconPlayMode = 'repeat';
   currentPlay: number | undefined;
   isLogged = false;
-  userId: number | undefined;
 
   constructor(
     private sharedService: SharedService,
@@ -41,9 +40,6 @@ export class PlayBarComponent implements OnInit {
     });
 
     this.isLogged = !!this.apiService.getCurrentUser();
-    if (this.isLogged) {
-      this.userId = this.apiService.getCurrentUser().id;
-    }
   }
 
   handleAudioEnd() {
@@ -65,9 +61,9 @@ export class PlayBarComponent implements OnInit {
               }
             )
           } else {
-            if (this.userId) {
+            if (this.apiService.getCurrentUser()) {
               let listNumber: number[] = [];
-              this.musicService.findFavSongIdsByUserId(this.userId).subscribe(
+              this.musicService.findFavSongIdsByUserId(this.apiService.getCurrentUser().id).subscribe(
                 (res) => {
                   listNumber = res;
                   if (this.currentPlay) {
