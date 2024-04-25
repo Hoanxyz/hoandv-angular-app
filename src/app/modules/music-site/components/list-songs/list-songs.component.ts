@@ -58,7 +58,6 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
 
       this.musicService.uploadSong(formData).subscribe(
         (response) => {
-          console.log('File uploaded successfully.');
           this.songTable.searchSong();
         },
         (error) => {

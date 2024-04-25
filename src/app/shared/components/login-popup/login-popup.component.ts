@@ -108,7 +108,11 @@ export class LoginPopupComponent {
         }, 2000);
       },
       (err) => {
-        console.log(err);
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            content: "Sai mật khẩu hoặc tài khoản"
+          }
+        });
       }
     );
   }

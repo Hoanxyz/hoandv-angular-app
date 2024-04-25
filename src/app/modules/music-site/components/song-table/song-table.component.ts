@@ -110,6 +110,7 @@ export class SongTableComponent implements OnInit {
         this.musicService.deleteSong(id).subscribe(
           (res) => {
             this.sharedService.emitReloadListSongsEvent(true);
+            this.sharedService.emmitAddToFav();
           }
         );
       }
@@ -124,7 +125,6 @@ export class SongTableComponent implements OnInit {
     if (this.listFavSongs.includes(id)) {
       this.musicService.deleteFav(data).subscribe(
         (res) => {
-          console.log("delete fav success");
           this.updateListFavSongs();
           if (this.playFromList == this.listPlay.FAV) {
             this.searchSong();
@@ -138,7 +138,6 @@ export class SongTableComponent implements OnInit {
     } else {
       this.musicService.addToFav(data).subscribe(
         (res) => {
-          console.log("add to fav success");
           this.updateListFavSongs();
           if (this.playFromList == this.listPlay.FAV) {
             this.searchSong();

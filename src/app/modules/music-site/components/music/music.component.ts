@@ -17,7 +17,6 @@ export class MusicComponent implements OnInit {
         pairwise()
       )
       .subscribe((event: any[]) => {
-        console.log(event[0].urlAfterRedirects);
       });
   }
 

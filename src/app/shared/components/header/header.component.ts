@@ -53,7 +53,6 @@ export class HeaderComponent implements OnInit {
   }
 
   changeLocation(url: string) {
-    console.log(url);
     this.router.navigate([url]);
   }
 }

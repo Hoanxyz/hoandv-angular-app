@@ -20,6 +20,12 @@ export class MusicService {
     return this.http.post<any>(`${listApis.local}/song/search-songs`, pageAble);
   }
 
+  getSongBase64(id: number): Observable<any> {
+    return this.http.get<any>(`${listApis.local}/song/get-song-base-64/${id}`,
+      { observe: 'response' }
+    );
+  }
+
   getSong(id: number): Observable<any> {
     return this.http.get<any>(`${listApis.local}/song/get-song/${id}`,
       { observe: 'response', responseType: 'blob' as 'json' }
@@ -59,5 +65,9 @@ export class MusicService {
 
   findNextSong(id: number): Observable<any> {
     return this.http.get<any>(`${listApis.local}/song/get-next-song/${id}`);
+  }
+
+  findPreSong(id: number): Observable<any> {
+    return this.http.get<any>(`${listApis.local}/song/get-pre-song/${id}`);
   }
 }

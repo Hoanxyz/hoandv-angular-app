@@ -35,7 +35,6 @@ export class MainPageComponent implements OnInit {
                 }
               }
             }
-            console.log(this.user);
           }
         )
       } else {
