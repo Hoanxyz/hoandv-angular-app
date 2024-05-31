@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ApiService} from "../../../../../shared/services/services.service";
+import {AlertDialogComponent} from "../../../../../shared/components/alert-dialog/alert-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-music-user-update',
@@ -13,7 +15,8 @@ export class MusicUserUpdateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -50,18 +53,27 @@ export class MusicUserUpdateComponent implements OnInit {
       return;
     }
     const userData = {
-      email: this.updateForm.get('email')?.value,
-      firstname: this.updateForm.get('firstname')?.value,
-      lastname: this.updateForm.get('lastname')?.value,
-      password: this.updateForm.get('password')?.value
+      email: this.updateForm.get('email')?.value ? this.updateForm.get('email')?.value.trim() : "",
+      firstname: this.updateForm.get('firstname')?.value ? this.updateForm.get('firstname')?.value.trim() : "",
+      lastname: this.updateForm.get('lastname')?.value ? this.updateForm.get('lastname')?.value.trim() : "",
+      password: this.updateForm.get('password')?.value ? this.updateForm.get('password')?.value.trim() : ""
     };
     this.apiService.updateUser(userData, this.user.id, this.updateForm.get('oldPassword')?.value).subscribe(
       (res) => {
         this.apiService.setNewDataUser(this.user.username);
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            content: 'Cập nhật thông tin thành công'
+          }
+        });
       }
       ,
       (err) => {
-        console.log(err);
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            content: err
+          }
+        });
       }
     )
   }

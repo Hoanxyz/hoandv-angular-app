@@ -132,7 +132,13 @@ export class LoginPopupComponent {
       return;
     }
     this.registerForm.removeControl("confirmPassword");
-    const userData = this.registerForm.getRawValue();
+    const userData = {
+      username: this.registerForm.get('username')?.value ? this.registerForm.get('username')?.value.trim() : '',
+      password: this.registerForm.get('password')?.value ? this.registerForm.get('password')?.value.trim() : '',
+      firstname: this.registerForm.get('firstname')?.value ? this.registerForm.get('firstname')?.value.trim() : '',
+      lastname: this.registerForm.get('lastname')?.value ? this.registerForm.get('lastname')?.value.trim() : '',
+      email: this.registerForm.get('email')?.value ? this.registerForm.get('email')?.value.trim() : '',
+    }
     this.apiService.createUser(userData).subscribe(
       (res) => {
         setTimeout(() => {

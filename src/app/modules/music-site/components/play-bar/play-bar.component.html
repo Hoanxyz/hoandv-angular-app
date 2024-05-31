@@ -1,4 +1,4 @@
-<div class="fixed bottom-0 left-0 w-full flex justify-between z-10 beautiful-bg font-mali">
+<div class="fixed bottom-0 left-0 w-full flex justify-between z-10 beautiful-bg-1 font-mali">
   <div class="flex flex-col justify-center w-full py-3">
     <div class="w-full">
       <p class="text-white text-center mb-1.5" *ngIf="songPlayingName">
@@ -7,6 +7,14 @@
     </div>
     <div class="m-auto md:flex items-center w-fit">
       <div class="flex justify-center px-2">
+        <div class="flex items-center">
+          <button class="flex" (click)="download()">
+            <mat-icon class="text-white">
+              download
+            </mat-icon>
+          </button>
+        </div>
+        <div class="w-1 h-full"></div>
         <div class="flex items-center">
           <button class="flex" (click)="preSong()">
             <mat-icon class="text-white">skip_previous</mat-icon>
@@ -31,10 +39,10 @@
         </div>
       </div>
     </div>
-    <div class="w-full">
-      <p class="text-white text-center mt-1.5">Danh sách đang phát:
-        {{ (currentPlay == -99 || localStorage.getItem("listPlay") == listPlay.SEARCH) ? "Không có" : nameListPlay }}
-      </p>
-    </div>
+<!--    <div class="w-full">-->
+<!--      <p class="text-white text-center mt-1.5">Danh sách đang phát:-->
+<!--        {{ (currentPlay == -99 || localStorage.getItem("listPlay") == listPlay.SEARCH) ? "Không có" : nameListPlay }}-->
+<!--      </p>-->
+<!--    </div>-->
   </div>
 </div>

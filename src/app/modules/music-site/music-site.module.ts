@@ -23,6 +23,7 @@ import { FavoriteListComponent } from './components/favorite-list/favorite-list.
 import { MusicDashboardComponent } from './components/music-dashboard/music-dashboard.component';
 import { MusicUserInfoComponent } from './components/music-dashboard/music-user-info/music-user-info.component';
 import { MusicUserUpdateComponent } from './components/music-dashboard/music-user-update/music-user-update.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MusicUserUpdateComponent } from './components/music-dashboard/music-use
     FavoriteListComponent,
     MusicDashboardComponent,
     MusicUserInfoComponent,
-    MusicUserUpdateComponent
+    MusicUserUpdateComponent,
+    SideBarComponent
   ],
   imports: [
     CommonModule,

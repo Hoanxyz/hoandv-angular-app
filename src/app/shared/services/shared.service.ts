@@ -11,6 +11,9 @@ export class SharedService {
   private reloadUserSource = new Subject<void>();
   reloadUser$ = this.reloadUserSource.asObservable();
 
+  private logoutSource = new Subject<void>();
+  logout$ = this.logoutSource.asObservable();
+
   constructor() { }
 
   emmitToggleSearch() {
@@ -19,5 +22,9 @@ export class SharedService {
 
   emmitReloadUser() {
     this.reloadUserSource.next();
+  }
+
+  emmitLogout() {
+    this.logoutSource.next();
   }
 }

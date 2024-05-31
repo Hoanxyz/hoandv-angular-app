@@ -28,12 +28,12 @@ export class PlayBarComponent implements OnInit {
   nameListPlay = "";
   codeListPlay = "";
   localStorage = localStorage;
-  listSongPlayed = [];
+  listSongsPlayed = [];
 
   constructor(
     private sharedService: SharedService,
     private musicService: MusicService,
-    private apiService: ApiService
+    private apiService: ApiService,
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +49,8 @@ export class PlayBarComponent implements OnInit {
         this.codeListPlay = localStorage.getItem("listPlay");
         // @ts-ignore
         this.nameListPlay = this.codeListPlay ? this.listPlayText[this.codeListPlay] : "";
+      } else {
+        this.audioSource = '';
       }
     });
 
@@ -68,24 +70,8 @@ export class PlayBarComponent implements OnInit {
     }
   }
 
-  getSongAndPlay(id: number) {
-    this.musicService.getSong(id).subscribe(
-      (res) => {
-        this.currentPlay = parseInt(id.toString());
-        this.dataSong = res.body;
-        const contentDisposition = res.headers.get('content-disposition');
-        const subString = contentDisposition.split('=')[2];
-        this.songPlayingName = subString.replace(/\\/g, '').replace(/"/g, '');
-        this.prepareSourceToPlay(id);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
   getSongBase64AndPlay(id: number) {
-    if (this.listSongPlayed[id]) {
+    if (this.listSongsPlayed[id]) {
       this.prepareSourceToPlay(id, true);
     } else {
       this.musicService.getSongBase64(id).subscribe(
@@ -113,16 +99,26 @@ export class PlayBarComponent implements OnInit {
   }
 
   prepareSourceToPlay(id: number, isExist = false) {
+    console.log(this.listSongsPlayed);
+
     let songUrl = "";
     if (isExist) {
-      songUrl = this.listSongPlayed[id];
+        // @ts-ignore
+        songUrl = this.listSongsPlayed[id].url;
+        // @ts-ignore
+        this.songPlayingName = this.listSongsPlayed[id].name;
     } else {
       const audioBlob = new Blob([this.dataSong], { type: 'audio/mp3' });
       songUrl = URL.createObjectURL(audioBlob);
-      // @ts-ignore
-      this.listSongPlayed[id] = songUrl;
+        // @ts-ignore
+      this.listSongsPlayed[id] = {
+        name: this.songPlayingName,
+        url: songUrl
+      };
     }
     this.audioSource = songUrl;
+    this.currentPlay = id;
+    this.sharedService.emitPlaySongAutoEvent(id);
     setTimeout(() => {
       this.audio.nativeElement.play();
     }, 1000);
@@ -232,6 +228,46 @@ export class PlayBarComponent implements OnInit {
           )
         }
       }
+    }
+  }
+
+  download() {
+    if (this.currentPlay == -99 && this.currentPlay == undefined) {
+      return;
+    } else {
+      const id = this.currentPlay == undefined ? 0 : this.currentPlay;
+      let blobUrl = '';
+      let songPlayingName = '';
+      const link = document.createElement("a");
+      if (this.listSongsPlayed[id]) {
+        this.prepareSourceToPlay(id, true);
+        // @ts-ignore
+        blobUrl = this.listSongsPlayed[id].url;
+        // @ts-ignore
+        songPlayingName = this.listSongsPlayed[id].name;
+      } else {
+        if (this.currentPlay) {
+          this.musicService.getSong(this.currentPlay).subscribe(
+            (res) => {
+              const contentDisposition = res.headers.get('content-disposition');
+              const subString = contentDisposition.split('=')[2];
+              songPlayingName = subString.replace(/\\/g, '').replace(/"/g, '');
+
+              const blob = new Blob([res.body], { type: "audio/mp3" });
+              blobUrl = URL.createObjectURL(blob);
+              link.href = blobUrl;
+              link.download = songPlayingName;
+              link.click();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
+      }
+      link.href = blobUrl;
+      link.download = songPlayingName;
+      link.click();
     }
   }
 }

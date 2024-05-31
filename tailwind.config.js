@@ -36,6 +36,10 @@ module.exports = {
         '.beautiful-bg': {
           backgroundColor: '#A9C9FF',
           backgroundImage: 'linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%)'
+        },
+        '.beautiful-bg-1': {
+          backgroundColor: '#A9C9FF',
+          backgroundImage: 'linear-gradient(360deg, #A9C9FF 0%, #FFBBEC 100%)'
         }
       })
     })

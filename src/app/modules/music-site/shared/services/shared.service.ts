@@ -9,6 +9,10 @@ export class SharedService {
     new BehaviorSubject<number>(-99);
   playSong$ = this.playSongEventSource.asObservable();
 
+  private playSongAutoEventSource =
+    new BehaviorSubject<number>(-99);
+  playSongAuto$ = this.playSongAutoEventSource.asObservable();
+
   private reloadSongsEventResource = new BehaviorSubject<boolean>(false);
   reloadListSongs$ = this.reloadSongsEventResource.asObservable();
 
@@ -23,6 +27,10 @@ export class SharedService {
 
   emitPlaySongEvent(data: number): void {
     this.playSongEventSource.next(data);
+  }
+
+  emitPlaySongAutoEvent(data: number): void {
+    this.playSongAutoEventSource.next(data);
   }
 
   emitReloadListSongsEvent(data: boolean): void {

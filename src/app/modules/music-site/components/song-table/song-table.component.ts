@@ -25,6 +25,8 @@ export class SongTableComponent implements OnInit {
   isLogged = false;
   userId = -1;
   listPlay = ListPlay;
+  currentSongPlay = 0;
+  currentListPlay: string | null = '';
 
   constructor(
     private musicService: MusicService,
@@ -46,6 +48,16 @@ export class SongTableComponent implements OnInit {
         }
       });
     }
+
+    this.sharedService.playSongAuto$.subscribe(data => {
+      this.currentSongPlay = data;
+      this.currentListPlay = localStorage.getItem("listPlay");
+    });
+
+    this.sharedService.playSong$.subscribe(data => {
+      this.currentSongPlay = data;
+      this.currentListPlay = localStorage.getItem("listPlay");
+    });
   }
 
   updateListFavSongs(): void {
@@ -119,7 +131,7 @@ export class SongTableComponent implements OnInit {
 
   addToFavor(id: number) {
     const data = {
-      userId : this.userId,
+      userId: this.userId,
       songId: id
     }
     if (this.listFavSongs.includes(id)) {
@@ -153,5 +165,26 @@ export class SongTableComponent implements OnInit {
 
   isFav(id: number): boolean {
     return this.listFavSongs.includes(id);
+  }
+
+  downloadSong(id: number) {
+    let blobUrl = '';
+    let songPlayingName = '';
+    const link = document.createElement("a");
+    this.musicService.getSong(id).subscribe(
+      (res) => {
+        const contentDisposition = res.headers.get('content-disposition');
+        const subString = contentDisposition.split('=')[2];
+        songPlayingName = subString.replace(/\\/g, '').replace(/"/g, '');
+        const blob = new Blob([res.body], { type: "audio/mp3" });
+        blobUrl = URL.createObjectURL(blob);
+        link.href = blobUrl;
+        link.download = songPlayingName;
+        link.click();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

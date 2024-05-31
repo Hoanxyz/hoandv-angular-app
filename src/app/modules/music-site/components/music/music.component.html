@@ -1,4 +1,6 @@
-<div class="pb-[140px]">
+<div class="pb-[100px]">
   <router-outlet></router-outlet>
-  <app-play-bar></app-play-bar>
+  <div [hidden]="window.location.href.includes('login')">
+    <app-play-bar></app-play-bar>
+  </div>
 </div>

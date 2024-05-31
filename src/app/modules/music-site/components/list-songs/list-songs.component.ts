@@ -15,6 +15,7 @@ import {ListPlay} from "../../shared/constants/music.constant";
 
 export class ListSongsComponent implements OnInit, AfterViewInit {
   @ViewChild(SongTableComponent) songTable!: SongTableComponent;
+  @ViewChild('uploadSong') uploadSong!: ElementRef<HTMLInputElement>;
   selectedFile: File | null = null;
   listPlay = ListPlay;
   pageAble: PageAble = {
@@ -59,9 +60,20 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
       this.musicService.uploadSong(formData).subscribe(
         (response) => {
           this.songTable.searchSong();
+          this.uploadSong.nativeElement.value = "";
+          this.selectedFile = null;
+          this.dialog.open(AlertDialogComponent, {
+            data: {
+              content: 'Upload bài hát thành công'
+            }
+          });
         },
         (error) => {
-          console.error('Error uploading file:', error);
+          this.dialog.open(AlertDialogComponent, {
+            data: {
+              content: error
+            }
+          });
         }
       );
     }
