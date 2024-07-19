@@ -25,7 +25,7 @@ import { DashboardUserInfoComponent } from './shared/components/user-dashboard/d
     UserDashboardComponent,
     DashboardSidebarComponent,
     DashboardUpdateAccountComponent,
-    DashboardUserInfoComponent,
+    DashboardUserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +46,6 @@ import { DashboardUserInfoComponent } from './shared/components/user-dashboard/d
     ApiService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
-    exports: [
-    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

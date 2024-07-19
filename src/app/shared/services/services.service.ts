@@ -50,4 +50,8 @@ export class ApiService {
       }
     )
   }
+
+  checkTokenValid(): Observable<any> {
+    return this.http.get<any>(`${listApis.local}/user/check-token-valid`);
+  }
 }

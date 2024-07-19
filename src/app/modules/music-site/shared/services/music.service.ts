@@ -70,4 +70,8 @@ export class MusicService {
   findPreSong(id: number): Observable<any> {
     return this.http.get<any>(`${listApis.local}/song/get-pre-song/${id}`);
   }
+
+  getPosts(): Observable<any> {
+    return this.http.get<any>(`${listApis.local}/test-fiegn/get-posts`);
+  }
 }

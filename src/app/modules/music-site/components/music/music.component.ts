@@ -4,8 +4,8 @@ import { filter, pairwise } from 'rxjs/operators';
 import {ListPlay} from "../../shared/constants/music.constant";
 import {SharedService as RootSharedService} from "../../../../shared/services/shared.service";
 import {SharedService} from "../../shared/services/shared.service";
-import {MusicService} from "../../shared/services/music.service";
 import {ApiService} from "../../../../shared/services/services.service";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-music',
@@ -15,12 +15,29 @@ import {ApiService} from "../../../../shared/services/services.service";
 export class MusicComponent implements OnInit {
 
   window = window;
+  formData = this.fb.group({
+    money: [null]
+  })
 
   constructor(
     private router: Router,
     private sharedService: SharedService,
     private rootShareService: RootSharedService,
+    private apiService: ApiService,
+    private fb: FormBuilder
   ) {
+    this.apiService.checkTokenValid().subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (error) => {
+        console.log(error);
+        if(error.status == '403') {
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('authToken');
+        }
+      }
+    )
     this.rootShareService.logout$.subscribe(
       () => {
         this.sharedService.emitPlaySongEvent(-99);
@@ -48,5 +65,9 @@ export class MusicComponent implements OnInit {
     if (currentUrl.endsWith('music')) {
       this.router.navigate(["music/list-songs"]);
     }
+  }
+
+  show(): void {
+    console.log(this.formData.getRawValue());
   }
 }

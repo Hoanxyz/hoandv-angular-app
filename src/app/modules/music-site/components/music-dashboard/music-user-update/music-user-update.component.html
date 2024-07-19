@@ -1,4 +1,20 @@
 <form action="" [formGroup]="updateForm">
+  <div class="">
+    <input type="file" (change)="fileChangeEvent($event)" />
+    <div class="flex">
+      <image-cropper class="!w-1/2"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="4 / 3"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded($event)"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+      <img class="!w-1/2" [src]="croppedImage"  alt=""/>
+    </div>
+  </div>
   <div class="border-b-2 border-gray-500 mb-5">
     <mat-form-field class="w-full my-1">
       <mat-label class="font-mali">Email</mat-label>

@@ -3,6 +3,9 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import {ApiService} from "../../../../../shared/services/services.service";
 import {AlertDialogComponent} from "../../../../../shared/components/alert-dialog/alert-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import { ImageCropperComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-music-user-update',
@@ -12,11 +15,14 @@ import {MatDialog} from "@angular/material/dialog";
 export class MusicUserUpdateComponent implements OnInit {
   @Input() user!: any;
   updateForm!: FormGroup;
+  imageChangedEvent: Event | null = null;
+  croppedImage: SafeUrl  = '';
 
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -76,5 +82,24 @@ export class MusicUserUpdateComponent implements OnInit {
         });
       }
     )
+  }
+
+  fileChangeEvent(event: Event): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    if (event.objectUrl != null) {
+      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
+    }
+    // event.blob can be used to upload the cropped image
+  }
+  imageLoaded(image: LoadedImage) {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
   }
 }

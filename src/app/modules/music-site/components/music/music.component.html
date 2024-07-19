@@ -1,4 +1,8 @@
 <div class="pb-[100px]">
+  <form action="" [formGroup]="formData">
+    <app-input-money [control]="formData.controls['money']"></app-input-money>
+    <button (click)="show()">Show</button>
+  </form>
   <router-outlet></router-outlet>
   <div [hidden]="window.location.href.includes('login')">
     <app-play-bar></app-play-bar>

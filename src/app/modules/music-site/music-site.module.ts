@@ -24,6 +24,10 @@ import { MusicDashboardComponent } from './components/music-dashboard/music-dash
 import { MusicUserInfoComponent } from './components/music-dashboard/music-user-info/music-user-info.component';
 import { MusicUserUpdateComponent } from './components/music-dashboard/music-user-update/music-user-update.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import {ImageCropperComponent} from "ngx-image-cropper";
+import {TabGroupComponent} from "../../shared/components/tab-group/tab-group.component";
+import {TabPanelComponent} from "../../shared/components/tab-group/tab-panel/tab-panel.component";
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     MusicDashboardComponent,
     MusicUserInfoComponent,
     MusicUserUpdateComponent,
-    SideBarComponent
+    SideBarComponent,
+    TabGroupComponent,
+    TabPanelComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +61,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     ReactiveFormsModule,
     MatTooltipModule,
     MatMenuModule,
+    ImageCropperComponent,
+    SharedModule
   ]
 })
 export class MusicSiteModule { }

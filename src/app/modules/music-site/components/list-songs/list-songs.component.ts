@@ -40,6 +40,15 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
         this.songTable.searchSong();
       }
     })
+
+    this.musicService.getPosts().subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
   }
 
   onFileSelected(event: any): void {
