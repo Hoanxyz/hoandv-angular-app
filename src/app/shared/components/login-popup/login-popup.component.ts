@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {ApiService} from "../../services/services.service";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-login-popup',
@@ -50,10 +51,10 @@ export class LoginPopupComponent {
     {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      confirmPassword: [null],
+      confirmPassword: [null, [Validators.required]],
       firstname: [''],
       lastname: [''],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.email]],
     },{
       validators: this.passwordMatchValidator
     }
@@ -63,7 +64,8 @@ export class LoginPopupComponent {
     public dialog: MatDialog,
     public router: Router,
     private fb: FormBuilder,
-    public apiService: ApiService
+    public apiService: ApiService,
+    private sharedService: SharedService
   ) {
   }
 

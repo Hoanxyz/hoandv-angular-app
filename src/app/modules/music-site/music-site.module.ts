@@ -28,6 +28,11 @@ import {ImageCropperComponent} from "ngx-image-cropper";
 import {TabGroupComponent} from "../../shared/components/tab-group/tab-group.component";
 import {TabPanelComponent} from "../../shared/components/tab-group/tab-panel/tab-panel.component";
 import {SharedModule} from "../../shared/shared.module";
+import { MusicUserCollectionsComponent } from './components/music-dashboard/music-user-collections/music-user-collections.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatTabsModule} from "@angular/material/tabs";
+import { SongCollectionsComponent } from './components/song-collections/song-collections.component';
 
 @NgModule({
   declarations: [
@@ -47,22 +52,27 @@ import {SharedModule} from "../../shared/shared.module";
     MusicUserUpdateComponent,
     SideBarComponent,
     TabGroupComponent,
-    TabPanelComponent
+    TabPanelComponent,
+    MusicUserCollectionsComponent,
+    SongCollectionsComponent,
   ],
-  imports: [
-    CommonModule,
-    MusicSiteRoutingModule,
-    MatButtonModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatTooltipModule,
-    MatMenuModule,
-    ImageCropperComponent,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        MusicSiteRoutingModule,
+        MatButtonModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatTooltipModule,
+        MatMenuModule,
+        ImageCropperComponent,
+        SharedModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatTabsModule
+    ]
 })
 export class MusicSiteModule { }

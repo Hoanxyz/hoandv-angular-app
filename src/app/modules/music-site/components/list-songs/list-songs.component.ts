@@ -2,10 +2,12 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {MusicService} from "../../shared/services/music.service";
 import {PageAble} from "../../../../shared/models/models";
 import {SongTableComponent} from "../song-table/song-table.component";
-import {SharedService} from "../../shared/services/shared.service";
+import {MusicSharedService} from "../../shared/services/music-shared.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AlertDialogComponent} from "../../../../shared/components/alert-dialog/alert-dialog.component";
 import {ListPlay} from "../../shared/constants/music.constant";
+import {FormBuilder} from "@angular/forms";
+import {CommonValidators} from "../../../../shared/validators/common-validator";
 
 @Component({
   selector: 'app-list-songs',
@@ -16,22 +18,35 @@ import {ListPlay} from "../../shared/constants/music.constant";
 export class ListSongsComponent implements OnInit, AfterViewInit {
   @ViewChild(SongTableComponent) songTable!: SongTableComponent;
   @ViewChild('uploadSong') uploadSong!: ElementRef<HTMLInputElement>;
-  selectedFile: File | null = null;
-  listPlay = ListPlay;
+  selectedFile: any;
+  listPlay = {
+    type: ListPlay.ALL,
+    name: 'Tất cả bài hát',
+    id: null
+  };
   pageAble: PageAble = {
+    searchType: "ALL",
     page: 0,
     size: 5,
-    textSearch: '',
+    textSearch: ''
   }
+  formUpload = this.fb.group({
+    size: [null],
+    name: [],
+    type: [null],
+  },{
+    validators: [CommonValidators.fileSizeValidator(15*1024*1024), CommonValidators.formatExcelValidator(['audio/mpeg'])]
+  });
+
   constructor(
     private musicService: MusicService,
-    private sharedService: SharedService,
-    public dialog: MatDialog
+    private sharedService: MusicSharedService,
+    public dialog: MatDialog,
+    public fb: FormBuilder
   ) {
   }
 
   ngAfterViewInit(): void {
-    this.songTable.searchSong();
   }
 
   ngOnInit(): void {
@@ -51,18 +66,22 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
     )
   }
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-    if (event.target.files[0].size >= 40000000)
-    this.dialog.open(AlertDialogComponent, {
-      data: {
-        content: 'Cho cái file be bé thôi (<40MB)'
-      }
-    })
+  onInputExcelFilePicked(event: Event, uploadSong: any): void {
+    // @ts-ignore
+    this.selectedFile = (event?.target as HTMLInputElement).files[0];
+  uploadSong.value = '';
+    // @ts-ignore
+    this.formUpload.get('name').patchValue(this.selectedFile.name);
+    // @ts-ignore
+    this.formUpload.get('type').patchValue(this.selectedFile.type);
+    // @ts-ignore
+    this.formUpload.get('size').patchValue(this.selectedFile.size);
+    console.log(this.formUpload);
+    this.formUpload.markAllAsTouched();
   }
 
   onUpload(): void {
-    if (this.selectedFile && (this.selectedFile.size < 40000000)) {
+    if (this.formUpload.valid) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 

@@ -14,6 +14,9 @@ export class SharedService {
   private logoutSource = new Subject<void>();
   logout$ = this.logoutSource.asObservable();
 
+  private loginSource = new Subject<void>();
+  login$ = this.loginSource.asObservable();
+
   constructor() { }
 
   emmitToggleSearch() {
@@ -26,5 +29,9 @@ export class SharedService {
 
   emmitLogout() {
     this.logoutSource.next();
+  }
+
+  emmitLogin() {
+    this.loginSource.next();
   }
 }

@@ -20,12 +20,13 @@
             </mat-form-field>
             <div class="mb-2" *ngIf="(registerForm.get('confirmPassword')?.value || registerForm.get('password')?.value)
               && registerForm.get('confirmPassword')?.errors">
+              <mat-error *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Trời ơi nhập lại mật khẩu đi</mat-error>
               <span class="text-red-600">Mật khẩu nhập lại không khớp rồi.</span>
             </div>
             <mat-form-field class="w-full my-1">
               <mat-label>Email</mat-label>
               <input matInput formControlName="email">
-              <mat-error *ngIf="registerForm.get('email')?.errors?.['required']">Thiếu email này chú heo con</mat-error>
+<!--              <mat-error *ngIf="registerForm.get('email')?.errors?.['required']">Thiếu email này chú heo con</mat-error>-->
               <mat-error *ngIf="registerForm.get('email')?.errors?.['email']">Email sai định dạng rồiiii</mat-error>
             </mat-form-field>
             <div class="flex my-1 justify-between w-full">
@@ -64,13 +65,13 @@
       <div class="overlay-container">
         <div class="overlay">
           <div class="overlay-panel overlay-left">
-            <h1 class="text-2xl !font-medium">Hê Nô</h1>
-            <p>Chưa có account thì đăng ký nhé</p>
+            <h2 class="text-2xl !font-medium">Hê Nô</h2>
+            <p>Có account rùi thì đăng nhập thôi</p>
             <button class="ghost !font-medium" id="signIn" (click)="changePos()">Sign In</button>
           </div>
           <div class="overlay-panel overlay-right">
-            <h1 class="text-2xl !font-medium">Xin chào</h1>
-            <p>Có account rùi thì đăng nhập thôi</p>
+            <h2 class="text-2xl !font-medium">Xin chào</h2>
+            <p>Chưa có account thì đăng ký nhé</p>
             <button class="ghost !font-medium" id="signUp" (click)="changePos()">Sign Up</button>
           </div>
         </div>

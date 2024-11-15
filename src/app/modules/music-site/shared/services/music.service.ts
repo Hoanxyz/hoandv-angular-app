@@ -4,7 +4,7 @@ import {listApis} from "../../../../shared/services/global-variables.constant";
 import {Injectable} from "@angular/core";
 import {PageAble} from "../../../../shared/models/models";
 import {ApiService} from "../../../../shared/services/services.service";
-import {data} from "autoprefixer";
+import {MusicSharedService} from "./music-shared.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,12 @@ export class MusicService {
   constructor(
     private http: HttpClient,
     public apiService: ApiService,
+    private musicSharedService: MusicSharedService
   ) {
   }
 
-  searchSongs(pageAble: PageAble): Observable<any> {
-    return this.http.post<any>(`${listApis.local}/song/search-songs`, pageAble);
+  searchSongs(pageAble: PageAble, url: string): Observable<any> {
+    return this.http.post<any>(`${listApis.local}/${url}`, pageAble);
   }
 
   getSongBase64(id: number): Observable<any> {
@@ -48,10 +49,11 @@ export class MusicService {
     return this.http.post<any>(`${listApis.local}/song/delete-fav`, data);
   }
 
-
-  getListFav(pageAble: PageAble): Observable<any>  {
-    return this.http.post<any>(`${listApis.local}/song/get-fav`, pageAble);
-  }
+  /**
+   * Get list id of fav songs
+   *
+   * @param id number
+   */
 
   findFavSongIdsByUserId(id: number): Observable<any> {
     return this.http.get<any>(`${listApis.local}/song/get-fav-ids`,
@@ -73,5 +75,38 @@ export class MusicService {
 
   getPosts(): Observable<any> {
     return this.http.get<any>(`${listApis.local}/test-fiegn/get-posts`);
+  }
+
+  createSongCollection(data: any): Observable<any> {
+    return this.http.post<any>(`${listApis.local}/song-collection/create`, data);
+  }
+
+  handleAddToCollection(data: any): Observable<any> {
+    return this.http.post<any>(`${listApis.local}/song-collection/handle-add-to-collection`, data);
+  }
+
+  userSongCollection(id: any): Observable<any> {
+    return this.http.get<any>(`${listApis.local}/song-collection/list-of-user/${id}`);
+  }
+
+  storageCollections(): void {
+    this.userSongCollection(this.apiService.getCurrentUser().id).subscribe(
+      (res: any) => {
+        localStorage.setItem('songCollections', JSON.stringify(res));
+        this.musicSharedService.emmitNewCollection();
+      },
+      (err: any) => {
+        localStorage.removeItem('songCollections');
+      }
+    )
+  }
+
+  deleteCollection(id: number): Observable<any> {
+    return this.http.post<any>(`${listApis.local}/song-collection/delete/${id}`, {});
+  }
+
+  getCollectionsStorage(): any {
+    const collectionsData = localStorage.getItem('songCollections');
+    return collectionsData ? JSON.parse(collectionsData) : [];
   }
 }

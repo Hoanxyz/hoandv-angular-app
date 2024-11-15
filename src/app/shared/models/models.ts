@@ -21,8 +21,10 @@ export interface PageAble {
   page: number;
   size: number;
   textSearch?: string;
+  searchType?: string;
   ids?: number[];
   userId?: number | null;
+  collectionId?: number | null;
 }
 
 export interface IUrl {

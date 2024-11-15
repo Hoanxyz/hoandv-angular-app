@@ -12,11 +12,16 @@ import {ListPlay} from "../../shared/constants/music.constant";
 })
 export class SearchBarComponent {
   @ViewChild(SongTableComponent) songTable!: SongTableComponent;
-  listPlay = ListPlay;
+  listPlay = {
+    type: ListPlay.SEARCH,
+    name: 'Tất cả bài hát',
+    id: null
+  };
   pageAble: PageAble = {
+    searchType: "SEARCH",
     page: 0,
     size: 5,
-    textSearch: '',
+    textSearch: ''
   }
 
   formSearch = this.fb.group({

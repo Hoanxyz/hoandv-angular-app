@@ -8,4 +8,5 @@ export enum ListPlay {
   ALL = 'ALL',
   FAV = 'FAV',
   SEARCH = 'SEARCH',
+  COLLECTION = 'COLLECTION',
 }

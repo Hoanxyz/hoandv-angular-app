@@ -18,6 +18,10 @@ export class MusicDashboardComponent implements OnInit {
       title: 'Cập nhật thông tin',
       tab: 'user-update'
     },
+    {
+      title: 'Danh sách nhạc',
+      tab: 'user-collections'
+    },
   ];
 
   ngOnInit(): void {

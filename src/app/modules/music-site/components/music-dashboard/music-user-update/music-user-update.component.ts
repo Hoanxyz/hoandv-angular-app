@@ -30,7 +30,7 @@ export class MusicUserUpdateComponent implements OnInit {
     this.updateForm = this.fb.group(
       {
         username: [this.user.username],
-        email: [this.user.email, [Validators.required]],
+        email: [this.user.email, [Validators.email]],
         firstname: [this.user?.firstname],
         lastname: [this.user?.lastname],
         oldPassword: [null, [Validators.required]],

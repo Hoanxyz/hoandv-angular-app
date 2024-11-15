@@ -16,7 +16,7 @@
       <div>
         <div class="flex items-center" *ngIf="user; else loginBlock">
           <div class="mr-2 hidden md:block">
-            <span class="font-semibold">Hellu {{user?.lastname}}</span>
+            <span class="font-semibold">Hellu {{user?.lastname ? user?.lastname : user?.username}}</span>
           </div>
           <div>
             <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon !flex items-center justify-between">

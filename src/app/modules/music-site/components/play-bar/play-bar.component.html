@@ -39,10 +39,10 @@
         </div>
       </div>
     </div>
-<!--    <div class="w-full">-->
-<!--      <p class="text-white text-center mt-1.5">Danh sách đang phát:-->
-<!--        {{ (currentPlay == -99 || localStorage.getItem("listPlay") == listPlay.SEARCH) ? "Không có" : nameListPlay }}-->
-<!--      </p>-->
-<!--    </div>-->
+    <div class="w-full" *ngIf="songPlayingName">
+      <p class="text-white text-center mt-1.5">Danh sách đang phát:
+        {{ listName() }}
+      </p>
+    </div>
   </div>
 </div>

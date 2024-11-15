@@ -1,12 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PageAble} from "../../../../shared/models/models";
 import {MusicService} from "../../shared/services/music.service";
-import {SharedService} from "../../shared/services/shared.service";
+import {MusicSharedService} from "../../shared/services/music-shared.service";
 import {ConfirmDialogComponent} from "../../../../shared/components/confirm-dialog/confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ApiService} from "../../../../shared/services/services.service";
 import {ListPlay} from "../../shared/constants/music.constant";
-import {ISongResponse} from "../../shared/models/music-models";
+import {IListPlay, ISongResponse} from "../../shared/models/music-models";
+import {AlertDialogComponent} from "../../../../shared/components/alert-dialog/alert-dialog.component";
+import {objectsHaveSamePropertiesAndValues} from "../../shared/utils/utils";
 
 @Component({
   selector: 'app-song-table',
@@ -16,9 +18,13 @@ import {ISongResponse} from "../../shared/models/music-models";
 export class SongTableComponent implements OnInit {
   @Input() pageAble!: PageAble;
   @Input() showDelete = true;
-  @Input() playFromList = "ALL";
+  @Input() playFromList = {
+    type: ListPlay.ALL,
+    name: 'Tất cả bài hát',
+    id: null
+  };
   @Input() classAdd = "";
-  @Output() playSelectedSong = new EventEmitter<number>();
+  @Input() apiUrl = 'song/search-songs';
   listSongs: ISongResponse[] = [];
   totalSongs!: number;
   listFavSongs: number[] = [];
@@ -26,38 +32,65 @@ export class SongTableComponent implements OnInit {
   userId = -1;
   listPlay = ListPlay;
   currentSongPlay = 0;
-  currentListPlay: string | null = '';
+  currentListPlay!: IListPlay;
+  collections: any;
+  sameListPlay = objectsHaveSamePropertiesAndValues;
 
   constructor(
     private musicService: MusicService,
-    private sharedService: SharedService,
+    private sharedService: MusicSharedService,
     public dialog: MatDialog,
     public apiService: ApiService,
   ) {
   }
 
   ngOnInit(): void {
+    this.searchSong();
     this.isLogged = !!this.apiService.getCurrentUser();
     if (this.isLogged) {
       this.userId = this.apiService.getCurrentUser().id;
       this.updateListFavSongs();
+      this.listenChangeCollection();
       this.sharedService.addToFav$.subscribe(() => {
         this.updateListFavSongs();
-        if (this.playFromList == this.listPlay.FAV) {
+        if (this.pageAble.searchType === ListPlay.FAV) {
           this.searchSong();
         }
       });
+      this.sharedService.collectionChange$.subscribe(() => {
+        this.listenChangeCollection();
+      });
+    } else {
+      localStorage.removeItem('songCollections');
     }
 
     this.sharedService.playSongAuto$.subscribe(data => {
       this.currentSongPlay = data;
-      this.currentListPlay = localStorage.getItem("listPlay");
+      // @ts-ignore
+      this.currentListPlay = JSON.parse(localStorage.getItem("listPlay"));
     });
 
     this.sharedService.playSong$.subscribe(data => {
-      this.currentSongPlay = data;
-      this.currentListPlay = localStorage.getItem("listPlay");
+      // @ts-ignore
+      this.currentListPlay = JSON.parse(localStorage.getItem("listPlay"));
     });
+  }
+
+  listenChangeCollection(): void {
+    this.musicService.userSongCollection(this.userId).subscribe(
+      (res: any) => {
+        localStorage.setItem('songCollections', JSON.stringify(res));
+        this.displayCollection();
+        this.searchSong();
+      },
+      (err: any) => {
+        localStorage.removeItem('songCollections');
+      }
+    )
+  }
+
+  displayCollection(): void {
+    this.collections = this.musicService.getCollectionsStorage();
   }
 
   updateListFavSongs(): void {
@@ -73,36 +106,19 @@ export class SongTableComponent implements OnInit {
 
 
   searchSong() {
-    if (this.isLogged) {
-      this.pageAble.userId = this.userId;
-    }
-    if (this.playFromList == this.listPlay.FAV) {
-      if (this.isLogged) {
-        this.musicService.getListFav(this.pageAble).subscribe(
-          (res) => {
-            this.listSongs = res.content;
-            this.totalSongs = res.totalElements;
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+    this.musicService.searchSongs(this.pageAble, this.apiUrl).subscribe(
+      (res) => {
+        this.listSongs = res.content;
+        this.totalSongs = res.totalElements;
+      },
+      (error) => {
+        console.log(error);
       }
-    } else {
-      this.musicService.searchSongs(this.pageAble).subscribe(
-        (res) => {
-          this.listSongs = res.content;
-          this.totalSongs = res.totalElements;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+    );
   }
 
   playSong(id: number) {
-    localStorage.setItem("listPlay", this.playFromList);
+    localStorage.setItem("listPlay", JSON.stringify(this.playFromList));
     this.sharedService.emitPlaySongEvent(id);
   }
 
@@ -137,10 +153,6 @@ export class SongTableComponent implements OnInit {
     if (this.listFavSongs.includes(id)) {
       this.musicService.deleteFav(data).subscribe(
         (res) => {
-          this.updateListFavSongs();
-          if (this.playFromList == this.listPlay.FAV) {
-            this.searchSong();
-          }
           this.sharedService.emmitAddToFav();
         },
         (err) => {
@@ -150,10 +162,6 @@ export class SongTableComponent implements OnInit {
     } else {
       this.musicService.addToFav(data).subscribe(
         (res) => {
-          this.updateListFavSongs();
-          if (this.playFromList == this.listPlay.FAV) {
-            this.searchSong();
-          }
           this.sharedService.emmitAddToFav();
         },
         (err) => {
@@ -186,5 +194,25 @@ export class SongTableComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  handleAddToCollection(collectionId: any, songId: any): void {
+    this.musicService.handleAddToCollection({collectionId, songId}).subscribe(
+      (res: any) => {
+        this.sharedService.emmitCollectionChange();
+      },
+      (err: any) => {
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            content: err
+          }
+        });
+      }
+    )
+  }
+
+  isInCollection(collectionId: any, songId: any): boolean {
+    const currentCollection = this.musicService.getCollectionsStorage().find((i: any) => i.id == collectionId);
+    return currentCollection?.songs.some((i: any) => i.songId == songId);
   }
 }

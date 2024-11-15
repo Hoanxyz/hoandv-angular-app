@@ -43,6 +43,7 @@ export class ApiService {
     this.getUserByName({name}).subscribe(
       (res) => {
         localStorage.setItem('currentUser', JSON.stringify(res));
+        this.sharedService.emmitLogin();
         this.sharedService.emmitReloadUser();
       },
       (err) => {

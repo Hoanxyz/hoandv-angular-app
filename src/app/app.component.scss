@@ -4,7 +4,22 @@
   .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control,
   .mat-mdc-form-field-subscript-wrapper,
   .mat-mdc-form-field-bottom-align::before,
-  .mdc-text-field--filled .mdc-floating-label {
+  .mdc-text-field--filled .mdc-floating-label,
+  .mdc-tab__text-label,
+  .mat-expansion-panel-header-title,
+  .mat-mdc-paginator-container,
+  mat-checkbox .mdc-label {
     @apply font-mali;
+  }
+
+  .mat-expansion-indicator {
+    &::before, &::after {
+      border-color: #333333;
+    }
+  }
+
+  input[type=file], /* FF, IE7+, chrome (except button) */
+  input[type=file]::-webkit-file-upload-button { /* chromes and blink button */
+    cursor: pointer;
   }
 }

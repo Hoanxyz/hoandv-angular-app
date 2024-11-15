@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {SharedService} from "../../shared/services/shared.service";
+import {MusicSharedService} from "../../shared/services/music-shared.service";
 import {MusicService} from "../../shared/services/music.service";
 import {ListPlay, PlayMode} from "../../shared/constants/music.constant";
 import {ApiService} from "../../../../shared/services/services.service";
@@ -20,25 +20,18 @@ export class PlayBarComponent implements OnInit {
   currentPlay: number | undefined;
   isLogged = false;
   listPlay = ListPlay;
-  listPlayText =  {
-    'ALL': 'Tất cả',
-    'FAV': 'Yêu thích',
-    'SEARCH': 'Tìm kiếm',
-  };
-  nameListPlay = "";
-  codeListPlay = "";
-  localStorage = localStorage;
+  currentListPlay: any;
   listSongsPlayed = [];
 
   constructor(
-    private sharedService: SharedService,
+    private sharedService: MusicSharedService,
     private musicService: MusicService,
     private apiService: ApiService,
   ) {}
 
   ngOnInit(): void {
     this.sharedService.appendListSongs$.subscribe(data => {
-      localStorage.setItem("listPlay", data);
+      localStorage.setItem("listPlay", JSON.stringify(data));
     });
 
     this.sharedService.playSong$.subscribe(data => {
@@ -46,14 +39,11 @@ export class PlayBarComponent implements OnInit {
       if (data >= 0) {
         this.getSongBase64AndPlay(data);
         // @ts-ignore
-        this.codeListPlay = localStorage.getItem("listPlay");
-        // @ts-ignore
-        this.nameListPlay = this.codeListPlay ? this.listPlayText[this.codeListPlay] : "";
+        this.currentListPlay = JSON.parse(localStorage.getItem("listPlay"));
       } else {
         this.audioSource = '';
       }
     });
-
     this.isLogged = !!this.apiService.getCurrentUser();
   }
 
@@ -140,16 +130,26 @@ export class PlayBarComponent implements OnInit {
         break;
     }
   }
+  findNextSongIdInCollection(arr: any, currentSongId: any): any {
+    const currentIndex = arr.findIndex((item: any) => item.songId === currentSongId);
+    if (currentIndex < arr.length - 1) {
+      return arr[currentIndex + 1].songId;
+    } else {
+      return arr[0].songId;
+    }
+  }
+
 
   preSong() {
-    const currentListPlay = localStorage.getItem("listPlay");
+    // @ts-ignore
+    const currentListPlay = JSON.parse(localStorage.getItem("listPlay"));
     if (this.currentPlay == -99) {
       return;
     }
     if (this.currentPlay) {
-      if (currentListPlay == ListPlay.SEARCH) {
+      if (currentListPlay.type == ListPlay.SEARCH) {
         return;
-      } else if (currentListPlay == ListPlay.ALL) {
+      } else if (currentListPlay.type == ListPlay.ALL) {
         this.musicService.findPreSong(this.currentPlay).subscribe(
           (res) => {
             this.getSongBase64AndPlay(res);
@@ -189,14 +189,15 @@ export class PlayBarComponent implements OnInit {
   }
 
   playNextSong() {
-    const currentListPlay = localStorage.getItem("listPlay");
+    // @ts-ignore
+    const currentListPlay = JSON.parse(localStorage.getItem("listPlay"));
     if (this.currentPlay == -99) {
       return;
     }
     if (this.currentPlay) {
-      if (currentListPlay == ListPlay.SEARCH) {
+      if (currentListPlay.type == ListPlay.SEARCH) {
         return;
-      } else if (currentListPlay == ListPlay.ALL) {
+      } else if (currentListPlay.type == ListPlay.ALL) {
         this.musicService.findNextSong(this.currentPlay).subscribe(
           (res) => {
             this.getSongBase64AndPlay(res);
@@ -205,6 +206,11 @@ export class PlayBarComponent implements OnInit {
             console.log(error);
           }
         )
+      } else if (currentListPlay.type == ListPlay.COLLECTION) {
+        // @ts-ignore
+        const currentCollection = JSON.parse(localStorage.getItem("songCollections")).filter((i: any) => i.id === this.currentListPlay.id)[0];
+        const nextSOngInCollectionId = this.findNextSongIdInCollection(currentCollection.songs, this.currentPlay);
+        this.getSongBase64AndPlay(nextSOngInCollectionId);
       } else {
         if (this.apiService.getCurrentUser()) {
           let listNumber: number[] = [];
@@ -269,5 +275,10 @@ export class PlayBarComponent implements OnInit {
       link.download = songPlayingName;
       link.click();
     }
+  }
+
+  listName(): string {
+    // @ts-ignore
+    return (this.currentPlay == -99 || JSON.parse(localStorage.getItem("listPlay")).type == this.listPlay.SEARCH) ? "Không có" : this.currentListPlay.name;
   }
 }

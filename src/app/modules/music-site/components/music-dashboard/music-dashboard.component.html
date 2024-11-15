@@ -16,6 +16,7 @@
       <ng-container [ngSwitch]="currentTab">
         <app-music-user-info *ngSwitchCase="'user-info'" [user]="user"></app-music-user-info>
         <app-music-user-update *ngSwitchCase="'user-update'" [user]="user"></app-music-user-update>
+        <app-music-user-collections *ngSwitchCase="'user-collections'" [user]="user"></app-music-user-collections>
       </ng-container>
     </div>
   </div>

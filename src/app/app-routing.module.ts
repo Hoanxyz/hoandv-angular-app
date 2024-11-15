@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {NewYearModule} from "./modules/new-year/new-year.module";
 import {MusicSiteModule} from "./modules/music-site/music-site.module";
+import {TestModule} from "./modules/test/test.module";
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'music',
     loadChildren: () => import('./modules/music-site/music-site.module').then((m) => MusicSiteModule)
+  },
+  {
+    path: 'test',
+    loadChildren: () => import('./modules/test/test.module').then((m) => TestModule)
   },
   {
     path: '',

@@ -1,9 +1,8 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {SongTableComponent} from "../song-table/song-table.component";
-import {SharedService} from "../../shared/services/shared.service";
 import {PageAble} from "../../../../shared/models/models";
-import {MusicService} from "../../shared/services/music.service";
 import {ListPlay} from "../../shared/constants/music.constant";
+import {ApiService} from "../../../../shared/services/services.service";
 
 @Component({
   selector: 'app-favorite-list',
@@ -12,8 +11,13 @@ import {ListPlay} from "../../shared/constants/music.constant";
 })
 export class FavoriteListComponent implements OnInit, AfterViewInit {
   @ViewChild(SongTableComponent) songTable!: SongTableComponent;
-  listPlay = ListPlay;
+  listPlay = {
+    type: ListPlay.FAV,
+    name: 'Danh sách yêu thích',
+    id: null
+  };
   pageAble: PageAble = {
+    searchType: "FAV",
     page: 0,
     size: 5,
     textSearch: '',
@@ -21,15 +25,16 @@ export class FavoriteListComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private sharedService: SharedService,
-    private musicService: MusicService
+    public apiService: ApiService,
   ) {
+    if (this.apiService.getCurrentUser()) {
+      this.pageAble.userId = this.apiService.getCurrentUser().id;
+    }
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    this.songTable.searchSong();
   }
 }
