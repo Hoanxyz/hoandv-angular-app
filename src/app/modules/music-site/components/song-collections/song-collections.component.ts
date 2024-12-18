@@ -28,7 +28,7 @@ export class SongCollectionsComponent implements OnInit {
   ngOnInit(): void {
     if (this.apiService.getCurrentUser()) {
       this.collections = this.musicService.getCollectionsStorage();
-      console.log(this.collections);
+      // console.log(this.collections);
     }
 
     this.sharedService.newCollection$.subscribe(() => {

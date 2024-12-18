@@ -17,7 +17,7 @@
               <app-favorite-list></app-favorite-list>
             </mat-tab>
             <mat-tab label="Your Song Collections">
-              <div class="p-1">
+              <div class="p-3">
                 <app-song-collections></app-song-collections>
               </div>
             </mat-tab>
@@ -47,7 +47,7 @@
             <mat-icon class="text-blue-500" style="font-size: 36px; height: 36px; width: 36px; z-index: 0">cloud_upload</mat-icon>
           </div>
         </div>
-        <button class="!w-10 !h-10" mat-fab color="primary" (click)="onUpload()" [disabled]="!selectedFile"
+        <button class="!w-10 !h-10" mat-fab color="primary" (click)="onUpload()" [disabled]="!selectedFile || !formUpload.valid"
                 aria-label="Upload song (mp3 and m4a only)">
           <mat-icon>upload</mat-icon>
         </button>

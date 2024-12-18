@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {AdItem} from "../banner/ad-item";
+import {AdService} from "../banner/ad.service";
 
 @Component({
   selector: 'app-index',
@@ -7,21 +8,13 @@ import {FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-  form = this.fb.group({
-    totalQuantity: [60, [Validators.required, Validators.max(100)]]
-  })
+  ads!: AdItem[];
 
-  formData = this.fb.group({
-    money: [null]
-  })
   constructor(
-    private fb: FormBuilder
-  ) {
-  }
+    private adService: AdService,
+  ) {}
 
-  ngOnInit(): void {
-    setInterval(() => {
-      console.log(this.form.get('totalQuantity')?.value);
-    }, 1000);
+  ngOnInit() {
+    this.ads = this.adService.getAds();
   }
 }

@@ -1,12 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {Avatar, User} from "../../models/models";
-import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {ApiService} from "../../services/services.service";
 import {SharedService} from "../../services/shared.service";
+import {LoginValidator} from "./login-validator";
 
 @Component({
   selector: 'app-login-popup',
@@ -47,39 +48,36 @@ export class LoginPopupComponent {
     username: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
-  registerForm = this.fb.group(
-    {
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      confirmPassword: [null, [Validators.required]],
-      firstname: [''],
-      lastname: [''],
-      email: ['', [Validators.email]],
-    },{
-      validators: this.passwordMatchValidator
-    }
-  )
+  registerForm: FormGroup;
 
   constructor(
     public dialog: MatDialog,
     public router: Router,
     private fb: FormBuilder,
     public apiService: ApiService,
-    private sharedService: SharedService
+    private loginValidator: LoginValidator
   ) {
+    this.registerForm = this.fb.group(
+      {
+        username: ['', {
+            validators: [Validators.required],
+            asyncValidators: [this.loginValidator.validate.bind(this.loginValidator)],
+            updateOn: 'blur' // Set updateOn option to 'blur' only for the email control
+          }],
+        password: ['', [Validators.required]],
+        confirmPassword: [null, [Validators.required]],
+        firstname: [''],
+        lastname: [''],
+        email: ['', [Validators.email]],
+      },{
+        validators: LoginValidator.passwordMatchValidator
+      }
+    )
   }
 
-  private passwordMatchValidator(control: AbstractControl) {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password !== confirmPassword) {
-      control.get('confirmPassword')?.setErrors({ passwordMismatch: true });
-    } else {
-      control.get('confirmPassword')?.setErrors(null);
-    }
+  get userName() {
+    return this.registerForm.get('username');
   }
-
 
   changePos() {
     this.isSignIn = !this.isSignIn;

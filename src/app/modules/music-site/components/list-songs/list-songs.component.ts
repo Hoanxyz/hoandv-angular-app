@@ -58,7 +58,6 @@ export class ListSongsComponent implements OnInit, AfterViewInit {
 
     this.musicService.getPosts().subscribe(
       (res) => {
-        console.log(res);
       },
       (err) => {
         console.log(err);

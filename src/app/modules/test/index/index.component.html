@@ -1,10 +1,4 @@
-<form action="" [formGroup]="formData">
-  <app-input-money [control]="formData.controls['money']" [separate]="','" [currency]="'USD'"></app-input-money>
-</form>
-
-<form [formGroup]="form">
-  <app-choose-quantity [increment]="10" formControlName="totalQuantity"></app-choose-quantity>
-  <div>
-    {{form.controls['totalQuantity']}}
-  </div>
-</form>
+<div>
+  <app-ad-banner [ads]="ads" *appUnless="true"></app-ad-banner>
+  <app-heroes></app-heroes>
+</div>

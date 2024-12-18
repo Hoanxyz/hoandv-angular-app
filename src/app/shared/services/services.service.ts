@@ -55,4 +55,8 @@ export class ApiService {
   checkTokenValid(): Observable<any> {
     return this.http.get<any>(`${listApis.local}/user/check-token-valid`);
   }
+
+  isUserExist(username: string): Observable<boolean> {
+    return this.http.post<any>(`${listApis.local}/user/is-user-exist`, {username});
+  }
 }

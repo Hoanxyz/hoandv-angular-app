@@ -31,10 +31,9 @@ export class MusicComponent implements OnInit {
   ) {
     this.apiService.checkTokenValid().subscribe(
       (res) => {
-        console.log(res);
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
         if(error.status == '403') {
           localStorage.removeItem('currentUser');
           localStorage.removeItem('authToken');
