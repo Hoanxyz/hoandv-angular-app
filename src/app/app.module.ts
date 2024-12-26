@@ -40,7 +40,7 @@ import { DashboardUserInfoComponent } from './shared/components/user-dashboard/d
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [
     ApiService,

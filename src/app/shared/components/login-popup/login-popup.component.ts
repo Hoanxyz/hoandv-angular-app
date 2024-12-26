@@ -131,7 +131,7 @@ export class LoginPopupComponent {
     if (this.registerForm.invalid) {
       return;
     }
-    this.registerForm.removeControl("confirmPassword");
+    // this.registerForm.removeControl("confirmPassword");
     const userData = {
       username: this.registerForm.get('username')?.value ? this.registerForm.get('username')?.value.trim() : '',
       password: this.registerForm.get('password')?.value ? this.registerForm.get('password')?.value.trim() : '',
